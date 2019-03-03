@@ -4,6 +4,7 @@ import pygame
 import math
 import main2players12
 import main3players12
+import main4players
 from pygame.locals import *
 
 #INITIALIZE
@@ -28,6 +29,7 @@ BACKGROUND = pygame.image.load('resources/background.png')
 SHIP1   = pygame.image.load('resources/ship1.png')
 SHIP2   = pygame.image.load('resources/ship2.png')
 SHIP3   = pygame.image.load('resources/ship3.png')
+SHIP4   = pygame.image.load('resources/ship4.png')
 
 #representing colours
 BLACK =(0,0,0)
@@ -46,24 +48,31 @@ def main():
         
         #DRAW MAIN MENUE
         main_txt1 = " S P A C E  F I G H T E R S "
-        main_txt2 = " PLAYERS :"
+        main_txt2 = (" # PLAYERS?   --"+
+        "--  KEYS:  P1( left | up | right )  P2( a | w | d )  P3( j | i | l )  P4( f | t | h )")
         main_txt3 = " (2) "
         main_txt4 = " (3) "
-        
+        main_txt5 = " (4) "        
         p1_txt = BIGFONT.render((main_txt1), True, WHITE, BLACK)
         DISPLAY.blit(p1_txt,(210, 150))
         p2_txt = FONT.render((main_txt2), True, WHITE, BLACK)
-        DISPLAY.blit(p2_txt,(150, 350))
+        DISPLAY.blit(p2_txt,(150, 250))
         p3_txt = FONT.render((main_txt3), True, WHITE, BLACK)
-        DISPLAY.blit(p3_txt,(150, 450))
+        DISPLAY.blit(p3_txt,(150, 350))
         p4_txt = FONT.render((main_txt4), True, WHITE, BLACK)
-        DISPLAY.blit(p4_txt,(150, 550))
+        DISPLAY.blit(p4_txt,(150, 450))
+        p5_txt = FONT.render((main_txt5), True, WHITE, BLACK)
+        DISPLAY.blit(p5_txt,(150, 550))
         
+        DISPLAY.blit(SHIP1,(180,350))
+        DISPLAY.blit(SHIP2,(230,350))
         DISPLAY.blit(SHIP1,(180,450))
         DISPLAY.blit(SHIP2,(230,450))
+        DISPLAY.blit(SHIP3,(280,450))
         DISPLAY.blit(SHIP1,(180,550))
         DISPLAY.blit(SHIP2,(230,550))
         DISPLAY.blit(SHIP3,(280,550))
+        DISPLAY.blit(SHIP4,(330,550))
 
         
         for event in pygame.event.get():
@@ -81,6 +90,8 @@ def main():
                     main2players12.main()
                 if (event.key == K_3):
                     main3players12.main()
+                if (event.key == K_4):
+                    main4players.main()
 
 
 
