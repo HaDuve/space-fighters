@@ -87,9 +87,9 @@ def main():
 
                 # MOVEMENT with ARROW KEYS
                 if (event.key == K_2):
-                    main2players12.main()
+                    main2players.main()
                 if (event.key == K_3):
-                    main3players12.main()
+                    main3players.main()
                 if (event.key == K_4):
                     main4players.main()
 
