@@ -66,8 +66,8 @@ class Ship(Player):
     
     def __init__(self, x,y,player):
         
-        self.x = random.choice(range(5,15)) *x / 10
-        self.y = random.choice(range(5,15)) *y / 10
+        self.x = random.choice(range(7,10)) *x / 10
+        self.y = random.choice(range(7,10)) *y / 10
         self.speed = 0
         self.direction = 0
         self.k_left = self.k_right = 0
@@ -238,9 +238,9 @@ def endgame(p1, p2, p3, p4):
             score = "Player 1 has won with " + str(p1) + " points!"
         if p1<p2 and p2 > p3 and p2 > p4:
             score = "Player 2 has won with " + str(p2) + " points!"
-        if p3>p2 and p1 <p3 and p3 > p4:
+        if p3>p1 and p3 >p2 and p3 > p4:
             score = "Player 3 has won with " + str(p3) + " points!"
-        if p3>p2 and p1 <p3 and p3 > p4:
+        if p4>p1 and p4 >p2 and p4 > p3:
             score = "Player 4 has won with " +str(p4) + " points!"
         text_dead = BIGFONT.render(score, True, WHITE, BLACK)
         DISPLAY.blit(text_dead,(200,150))
@@ -253,7 +253,7 @@ def endgame(p1, p2, p3, p4):
         DISPLAY.blit(text_dead1,(200,250))
         DISPLAY.blit(text_dead2,(200,300))
         DISPLAY.blit(text_dead3,(200,350))
-        DISPLAY.blit(text_dead4,(200,450))
+        DISPLAY.blit(text_dead4,(200,400))
         DISPLAY.blit(text_restart,(200,500))
         
         for event in pygame.event.get():        

@@ -69,8 +69,8 @@ class Ship(Player):
     
     def __init__(self, x,y,player):
         
-        self.x = random.choice(range(5,15)) *x / 10
-        self.y = random.choice(range(5,15)) *y / 10
+        self.x = random.choice(range(7,10)) *x / 10
+        self.y = random.choice(range(7,10)) *y / 10
         self.speed = 0
         self.direction = 0
         self.k_left = self.k_right = 0
