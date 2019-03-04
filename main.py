@@ -2,8 +2,8 @@
 import sys
 import pygame
 import math
-import main2players12
-import main3players12
+import main2players
+import main3players
 import main4players
 from pygame.locals import *
 
