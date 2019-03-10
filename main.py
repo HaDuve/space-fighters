@@ -309,11 +309,14 @@ def choose_mode(playercount, player = 1):
                         if playercount == 2:
                             save_stats(1)
                             save_stats(2)
+                            save_stats(3)
+                            save_stats(4)
                             main2players.main()
                         if playercount == 3:
                             save_stats(1)
                             save_stats(2)
                             save_stats(3)
+                            save_stats(4)
                             main3players.main()
                         if playercount == 4:
                             save_stats(1)
