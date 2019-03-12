@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 import sys
 import pygame
-import math
 import main2players
 import main3players
 import main4players
@@ -16,7 +15,7 @@ pygame.display.set_caption("SpaceFighters")
 pygame.display.set_icon(pygame.image.load('resources/ship1.png'))
 fpsClock = pygame.time.Clock()
 pygame.mouse.set_visible(0)
-pygame.key.set_repeat(100, 100)
+pygame.key.set_repeat(100)
 CURSOR_ROW = 1
 CURSOR   = pygame.image.load('resources/cursor.png')
 
@@ -229,7 +228,8 @@ def choose_mode(playercount, player = 1):
         points_pl1 = " Money left for Upgrades :  " + str(STATS1[3]) + " $ "
         points_pl2 = " Money left for Upgrades :  " + str(STATS2[3]) + " $ "
         points_pl3 = " Money left for Upgrades :  " + str(STATS3[3]) + " $ "
-        points_pl4 = " Money left for Upgrades :  " + str(STATS4[3]) + " $ "    
+        points_pl4 = " Money left for Upgrades :  " + str(STATS4[3]) + " $ "
+        stats_text1 = stats_text2 = stats_text3 = player_txt1_ = points_txt_ = ""
         
         if player == 1:
             DISPLAY.blit(pygame.transform.scale(SHIP1,(100,100)),(580,50))
@@ -238,7 +238,10 @@ def choose_mode(playercount, player = 1):
             stats_text1 = " Ship Speed : " + STATS1[0] * "|x|"
             stats_text2 = " Maneuverability : " + STATS1[1] * "|x|"
             stats_text3 = " Rocket Max Speed : " + STATS1[2] * "|x|"
-            points_txt_ = MEDFONT.render((points_pl1), True, WHITE, BLACK)
+            if STATS1[3] >= 0:
+                points_txt_ = MEDFONT.render((points_pl1), True, WHITE, BLACK)
+            else:
+                points_txt_ = MEDFONT.render((points_pl1), True, RED, BLACK)
         if player == 2:
             DISPLAY.blit(pygame.transform.scale(SHIP2,(100,100)),(580,50))
             player_txt1 = " PLAYER " + str(player) +" MODIFY STATS "
@@ -246,7 +249,10 @@ def choose_mode(playercount, player = 1):
             stats_text1 = " Ship Speed : " + STATS2[0] * "|x|"
             stats_text2 = " Maneuverability : " + STATS2[1] * "|x|"
             stats_text3 = " Rocket Max Speed : " + STATS2[2] * "|x|"
-            points_txt_ = MEDFONT.render((points_pl2), True, WHITE, BLACK)
+            if STATS2[3] >= 0:
+                points_txt_ = MEDFONT.render((points_pl2), True, WHITE, BLACK)
+            else:
+                points_txt_ = MEDFONT.render((points_pl2), True, RED, BLACK)
         if player == 3:
             DISPLAY.blit(pygame.transform.scale(SHIP3,(100,100)),(580,50))
             player_txt1 = " PLAYER " + str(player) +" MODIFY STATS "
@@ -254,7 +260,10 @@ def choose_mode(playercount, player = 1):
             stats_text1 = " Ship Speed : " + STATS3[0] * "|x|"
             stats_text2 = " Maneuverability : " + STATS3[1] * "|x|"
             stats_text3 = " Rocket Max Speed : " + STATS3[2] * "|x|"
-            points_txt_ = MEDFONT.render((points_pl3), True, WHITE, BLACK)
+            if STATS3[3] >= 0:
+                points_txt_ = MEDFONT.render((points_pl3), True, WHITE, BLACK)
+            else:
+                points_txt_ = MEDFONT.render((points_pl3), True, RED, BLACK)
         if player == 4:
             DISPLAY.blit(pygame.transform.scale(SHIP4,(100,100)),(580,50))
             player_txt1 = " PLAYER " + str(player) +" MODIFY STATS "
@@ -262,7 +271,10 @@ def choose_mode(playercount, player = 1):
             stats_text1 = " Ship Speed : " + STATS4[0] * "|x|"
             stats_text2 = " Maneuverability : " + STATS4[1] * "|x|"
             stats_text3 = " Rocket Max Speed : " + STATS4[2] * "|x|"
-            points_txt_ = MEDFONT.render((points_pl4), True, WHITE, BLACK)
+            if STATS3[3] >= 0:
+                points_txt_ = MEDFONT.render((points_pl3), True, WHITE, BLACK)
+            else:
+                points_txt_ = MEDFONT.render((points_pl4), True, RED, BLACK)
 
         stats_text1_ = FONT.render((stats_text1), True, WHITE, BLACK)
         stats_text2_ = FONT.render((stats_text2), True, WHITE, BLACK)
