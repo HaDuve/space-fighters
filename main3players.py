@@ -50,6 +50,73 @@ BLUE =(100,115,175)
 RED =(176,52,52)
 GREEN =(84,155,70)
 
+def load_stats(player_nr):
+    if player_nr == 1:
+        try:
+            high_score_file = open("stats1.txt", "r")
+            stats = str(high_score_file.read())
+            high_score_file.close()
+        except IOError:
+            # Error reading file, no high score
+            print("There is no high score yet.")
+        except ValueError:
+            # There's a file there, but we don't understand the number.
+            print("I'm confused. Starting with no high score.")
+    
+        return stats
+    
+    if player_nr == 2:
+        try:
+            high_score_file = open("stats2.txt", "r")
+            stats = str(high_score_file.read())
+            high_score_file.close()
+        except IOError:
+            # Error reading file, no high score
+            print("There is no high score yet.")
+        except ValueError:
+            # There's a file there, but we don't understand the number.
+            print("I'm confused. Starting with no high score.")
+    
+        return stats
+    if player_nr == 3:
+        try:
+            high_score_file = open("stats3.txt", "r")
+            stats = str(high_score_file.read())
+            high_score_file.close()
+        except IOError:
+            # Error reading file, no high score
+            print("There is no high score yet.")
+        except ValueError:
+            # There's a file there, but we don't understand the number.
+            print("I'm confused. Starting with no high score.")
+    
+        return stats
+    if player_nr == 4:
+        try:
+            high_score_file = open("stats4.txt", "r")
+            stats = str(high_score_file.read())
+            high_score_file.close()
+        except IOError:
+            # Error reading file, no high score
+            print("There is no high score yet.")
+        except ValueError:
+            # There's a file there, but we don't understand the number.
+            print("I'm confused. Starting with no high score.")
+    
+        return stats
+
+STATS1 = load_stats(1)
+STATS2 = load_stats(2)
+STATS3 = load_stats(3)
+STATS4 = load_stats(4)
+
+print(STATS1, STATS2, STATS3, STATS4)
+
+shipspeed = [int(STATS1[1]),int(STATS2[1]),int(STATS3[1]),int(STATS4[1])]
+maneuv = [int(STATS1[4]),int(STATS2[4]),int(STATS3[4]),int(STATS4[4])]
+rocketspeed = [int(STATS1[7]),int(STATS2[7]),int(STATS3[7]),int(STATS4[7])]
+
+print(shipspeed, maneuv, rocketspeed)
 
 
 
@@ -65,7 +132,7 @@ class Ship(Player):
         
         self.x = random.choice(range(7,10)) *x / 10
         self.y = random.choice(range(7,10)) *y / 10
-        self.speed = 0
+        self.speed = shipspeed[player-1]
         self.direction = 0
         self.k_left = self.k_right = 0
         self.player = player
@@ -85,7 +152,6 @@ class Ship(Player):
             self.alive = False
         #COMPUTE NEW x and y
         if self.alive:
-            self.speed=3
             self.direction = 0
             self.direction += (self.k_left + self.k_right)
             
@@ -135,21 +201,19 @@ class Ship(Player):
 
 
     def change_angle2(self):
-        
+        m=maneuv[self.player-1]
         if self.direc == "LEFT" and self.boolean:
             if not self.lukas:
-                self.k_left += 3
+                self.k_left += m
             else:
-                self.k_right += -3
+                self.k_right += -m
         if self.direc == "RIGHT" and self.boolean:
             if not self.lukas:
-                self.k_right += -3
+                self.k_right += -m
             else:
-                self.k_left += 3
-        if self.direc == "LEFT2" and not self.boolean:
-            self.direction == 0
-        if self.direc == "RIGHT2" and not self.boolean:
-            self.direction == 0
+                self.k_left += m
+
+            
 class Rocket():
     
     def __init__(self,x,y,direction,exists,player):
@@ -163,7 +227,7 @@ class Rocket():
         
     def move(self):
         if self.exists:
-            if self.speed < 6:
+            if self.speed < rocketspeed[self.player-1]:
                 self.speed+= self.speed*0.1 +0.7
             if self.x > SCREENWIDTH and self.x < SCREENWIDTH+10:
                 self.x = 0
@@ -199,7 +263,7 @@ class Explode():
         
 
 def respawn(x,y):
-    explode(x,y)
+
     pass
 
 #TODO THIS 2 FUNCTIONS WITH EFFECTS
