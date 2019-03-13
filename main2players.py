@@ -217,10 +217,7 @@ class Ship(Player):
                 self.k_right += -m
             else:
                 self.k_left += m
-        if self.direc == "LEFT2" and not self.boolean:
-            self.direction == 0
-        if self.direc == "RIGHT2" and not self.boolean:
-            self.direction == 0
+
             
 class Rocket():
     
@@ -271,7 +268,7 @@ class Explode():
         
 
 def respawn(x,y):
-    explode(x,y)
+    #explode(x,y)
     pass
 
 #TODO THIS 2 FUNCTIONS WITH EFFECTS

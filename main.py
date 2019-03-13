@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 import sys
 import pygame
-import main2players
-import main3players
+
+
 import main4players
 from pygame.locals import *
 
@@ -15,7 +15,7 @@ pygame.display.set_caption("SpaceFighters")
 pygame.display.set_icon(pygame.image.load('resources/ship1.png'))
 fpsClock = pygame.time.Clock()
 pygame.mouse.set_visible(0)
-pygame.key.set_repeat(100)
+pygame.key.set_repeat(100,100)
 CURSOR_ROW = 1
 CURSOR   = pygame.image.load('resources/cursor.png')
 
@@ -50,6 +50,10 @@ STATS3 = [1,1,1,1000]
 STATS4 = [1,1,1,1000]
 
 def save_stats(player_nr):
+    global STATS1
+    global STATS2
+    global STATS3
+    global STATS4
     try:
         # Write the file to disk
         high_score_file = open("stats"+str(player_nr)+".txt", "w")
@@ -66,6 +70,7 @@ def save_stats(player_nr):
         # Hm, can't write it.
         print("Unable to save the high score.")
 
+
 def reset_all_stats():
     global STATS1
     global STATS2
@@ -75,6 +80,15 @@ def reset_all_stats():
     STATS2 = [1,1,1,1000]
     STATS3 = [1,1,1,1000]
     STATS4 = [1,1,1,1000]
+    for i in range(1,5):
+        try:
+            resetfile = open("stats"+str(i)+".txt", 'r+')
+            resetfile.truncate(0)
+        except IOError:
+            # Hm, can't write it.
+            print("Unable to save the high score.")
+        save_stats(i)
+
 
 def calc_points(player_nr):
     global STATS1
@@ -323,18 +337,21 @@ def choose_mode(playercount, player = 1):
                             save_stats(2)
                             save_stats(3)
                             save_stats(4)
+                            import main2players
                             main2players.main()
                         if playercount == 3:
                             save_stats(1)
                             save_stats(2)
                             save_stats(3)
                             save_stats(4)
+                            import main3players
                             main3players.main()
                         if playercount == 4:
                             save_stats(1)
                             save_stats(2)
                             save_stats(3)
                             save_stats(4)
+                            import main4players
                             main4players.main()
                     else:
                         choose_mode(playercount, player + 1)
@@ -345,6 +362,8 @@ def choose_mode(playercount, player = 1):
 def main():
     
     #MAINLOOP
+    reset_all_stats()
+
     while 1:
         DISPLAY.fill(BLACK)
         DISPLAY.blit(BACKGROUND,(0,0))
