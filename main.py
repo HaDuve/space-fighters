@@ -358,7 +358,10 @@ def choose_mode(playercount, player = 1):
 
         pygame.display.update()
         fpsClock.tick(60)
-        
+
+
+
+
 def main():
     
     #MAINLOOP
