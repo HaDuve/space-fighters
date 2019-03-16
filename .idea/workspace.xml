@@ -40,18 +40,19 @@
     <session id="405779020">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
+          <entry key="project.closed" value="1" />
           <entry key="project.open.time.12" value="1" />
           <entry key="project.opened" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="972" />
+          <entry key="py" value="1133" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="972" />
+          <entry key="Python" value="1133" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -75,8 +76,8 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/main4players.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="306">
-                  <caret line="798" lean-forward="true" selection-start-line="798" selection-end-line="798" />
+                <state relative-caret-position="-1265">
+                  <caret line="140" column="26" lean-forward="true" selection-start-line="140" selection-start-column="26" selection-end-line="140" selection-end-column="26" />
                 </state>
               </provider>
             </entry>
@@ -85,7 +86,7 @@
       </split-first>
       <split-second>
         <leaf>
-          <file pinned="false" current-in-tab="false">
+          <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/main.py">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="430">
@@ -97,25 +98,12 @@
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="true">
-            <entry file="file://$USER_HOME$/Desktop/Einf_Programmierung_Uebung/Info1/pygameSVN/RandomStuff/SpriteGame/main.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="65">
-                  <caret line="67" column="21" selection-start-line="67" selection-end-line="68" />
-                  <folding>
-                    <element signature="e#255#268#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
         </leaf>
       </split-second>
     </splitter>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>self.y</find>
       <find>image</find>
       <find>rocket</find>
       <find>list</find>
@@ -145,6 +133,7 @@
       <find>ship2 = Ship(x*0.2, y*0.8,2)</find>
       <find>ship3 = Ship(x*0.1, y*0.1,3)</find>
       <find>ship4 = Ship(x*0.8, y*0.2,4)</find>
+      <find>explosion = Explode((ship1.rect.x +ship2.rect.x)/2,(ship1.rect.y +ship2.rect.y)/2)</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -162,8 +151,8 @@
         <option value="$PROJECT_DIR$/main3players.py" />
         <option value="$PROJECT_DIR$/main2players.py" />
         <option value="$PROJECT_DIR$/main.py" />
-        <option value="$USER_HOME$/Desktop/Einf_Programmierung_Uebung/Info1/pygameSVN/RandomStuff/SpriteGame/main.py" />
         <option value="$PROJECT_DIR$/main4players.py" />
+        <option value="$USER_HOME$/Desktop/Einf_Programmierung_Uebung/Info1/pygameSVN/RandomStuff/SpriteGame/main.py" />
       </list>
     </option>
   </component>
@@ -206,7 +195,28 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.main4players">
+  <component name="RunManager" selected="Python.main (1)">
+    <configuration name="main (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="space-fighters" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$USER_HOME$/Desktop/Einf_Programmierung_Uebung/Info1/pygameSVN/RandomStuff/SpriteGame" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$USER_HOME$/Desktop/Einf_Programmierung_Uebung/Info1/pygameSVN/RandomStuff/SpriteGame/main.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="space-fighters" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -274,9 +284,11 @@
       <item itemvalue="Python.main" />
       <item itemvalue="Python.main2players" />
       <item itemvalue="Python.main4players" />
+      <item itemvalue="Python.main (1)" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.main (1)" />
         <item itemvalue="Python.main4players" />
         <item itemvalue="Python.main2players" />
         <item itemvalue="Python.main" />
@@ -294,7 +306,7 @@
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3262295" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.3262295" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -324,16 +336,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="430">
-          <caret line="355" column="47" selection-start-line="355" selection-start-column="47" selection-end-line="355" selection-end-column="47" />
-          <folding>
-            <element signature="e#22#32#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/AppData/Local/Temp/ProgramArcadeGames.com-python_examples-f.php-file=sprite_collect_blocks.py.url">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -344,20 +346,30 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/main4players.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1265">
+          <caret line="140" column="26" lean-forward="true" selection-start-line="140" selection-start-column="26" selection-end-line="140" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$USER_HOME$/Desktop/Einf_Programmierung_Uebung/Info1/pygameSVN/RandomStuff/SpriteGame/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="65">
-          <caret line="67" column="21" selection-start-line="67" selection-end-line="68" />
+        <state relative-caret-position="329">
+          <caret line="111" column="14" selection-start-line="111" selection-start-column="14" selection-end-line="111" selection-end-column="14" />
           <folding>
-            <element signature="e#255#268#0" expanded="true" />
+            <element signature="e#0#9#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main4players.py">
+    <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="798" lean-forward="true" selection-start-line="798" selection-end-line="798" />
+        <state relative-caret-position="430">
+          <caret line="355" column="47" selection-start-line="355" selection-start-column="47" selection-end-line="355" selection-end-column="47" />
+          <folding>
+            <element signature="e#22#32#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

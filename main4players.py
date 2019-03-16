@@ -137,6 +137,7 @@ class Ship(pygame.sprite.Sprite):
         self.direction = 0
         self.k_left = self.k_right = 0
         self.player = player
+        self.length = 4
         self.lukas = False
         self.boolean = False
         self.direc = ""
@@ -476,6 +477,7 @@ def main(player_count=4):
             
         #KollisionListe
 
+
         #SHIP COLLISIONS
         collisionx12 = ship1.rect.x < ship2.rect.x +30 and ship1.rect.x > ship2.rect.x -30
         collisiony12 = ship1.rect.y < ship2.rect.y +30 and ship1.rect.y > ship2.rect.y -30
@@ -585,7 +587,8 @@ def main(player_count=4):
             ship4.lukas = False
         #RESPAWN LUK_POWERUP
         if frame_nr > frame_start + 750:
-            luk.alive = True            
+            luk.alive = True
+            all_sprites_list.add(luk)
             
             
         #START LUK_POWERUP
@@ -594,6 +597,7 @@ def main(player_count=4):
             ship3.lukas = True
             ship4.lukas = True
             luk.alive = False
+            all_sprites_list.remove(luk)
             frame_start = frame_nr
             
         if collisionluk2 and luk.alive:
@@ -602,13 +606,15 @@ def main(player_count=4):
             ship4.lukas = True
             luk.alive = False
             frame_start = frame_nr
-            
+            all_sprites_list.remove(luk)
+
         if collisionluk3 and luk.alive:
             ship1.lukas = True
             ship2.lukas = True
             ship4.lukas = True
             luk.alive = False
             frame_start = frame_nr
+            all_sprites_list.remove(luk)
 
         if collisionluk4 and luk.alive:
             ship1.lukas = True
@@ -616,6 +622,7 @@ def main(player_count=4):
             ship3.lukas = True
             luk.alive = False
             frame_start = frame_nr
+            all_sprites_list.remove(luk)
 
         
         #KOLLISIONS Check #######
@@ -624,42 +631,42 @@ def main(player_count=4):
 
         #SHIP COLLISIONS
         elif collision12:
-            explosion = Explode((ship1.rect.x +ship2.rect.x)/2,(ship1.rect.y +ship2.rect.y)/2)
+            explosion.rect.x, explosion.rect.y = (ship1.rect.x +ship2.rect.x)/2,(ship1.rect.y +ship2.rect.y)/2
             ship1.rect.x, ship1.rect.y = x*0.8, y*0.8
             ship2.rect.x, ship2.rect.y = x*0.2, y*0.8
             p1_score -= 1
             p2_score -= 1
 
         elif collision13:
-            explosion = Explode((ship1.rect.x +ship3.rect.x)/2,(ship1.rect.y +ship3.rect.y)/2)
+            explosion.rect.x, explosion.rect.y = (ship1.rect.x +ship3.rect.x)/2,(ship1.rect.y +ship3.rect.y)/2
             ship1.rect.x, ship1.rect.y = x*0.8, y*0.8
             ship3.rect.x, ship3.rect.y = x*0.1, y*0.1
             p1_score -= 1
             p3_score -= 1
 
         elif collision23:
-            explosion = Explode((ship2.rect.x +ship3.rect.x)/2,(ship2.rect.y +ship3.rect.y)/2)
+            explosion.rect.x, explosion.rect.y = (ship2.rect.x +ship3.rect.x)/2,(ship2.rect.y +ship3.rect.y)/2
             ship2.rect.x, ship2.rect.y = x*0.2, y*0.8
             ship3.rect.x, ship3.rect.y = x*0.1, y*0.1
             p2_score -= 1
             p3_score -= 1
 
         elif collision14:
-            explosion = Explode((ship1.rect.x +ship4.rect.x)/2,(ship1.rect.y +ship4.rect.y)/2)
+            explosion.rect.x, explosion.rect.y = (ship1.rect.x +ship4.rect.x)/2,(ship1.rect.y +ship4.rect.y)/2
             ship1.rect.x, ship1.rect.y = x*0.8, y*0.8
             ship4.rect.x, ship4.rect.y = x*0.8, y*0.2
             p1_score -= 1
             p4_score -= 1
 
         elif collision24:
-            explosion = Explode((ship2.rect.x +ship4.rect.x)/2,(ship2.rect.y +ship4.rect.y)/2)
+            explosion.rect.x, explosion.rect.y = (ship2.rect.x +ship4.rect.x)/2,(ship2.rect.y +ship4.rect.y)/2
             ship2.rect.x, ship2.rect.y = x*0.2, y*0.8
             ship4.rect.x, ship4.rect.y = x*0.8, y*0.2
             p2_score -= 1
             p4_score -= 1
 
         elif collision34:
-            explosion = Explode((ship4.rect.x +ship3.rect.x)/2,(ship4.rect.y +ship3.rect.y)/2)
+            explosion.rect.x, explosion.rect.y = (ship3.rect.x +ship4.rect.x)/2,(ship3.rect.y +ship4.rect.y)/2
             ship4.rect.x, ship4.rect.y = x*0.8, y*0.2
             ship3.rect.x, ship3.rect.y = x*0.1, y*0.1
             p2_score -= 1
@@ -669,84 +676,84 @@ def main(player_count=4):
 
         elif collision2r1:
             explosion2 = Explode(rocket2.rect.x,rocket2.rect.y)
-            rocket2 = Rocket(999,999,0,False,2)
+            rocket2.exists= False
             ship1.rect.x, ship1.rect.y = x*0.8, y*0.8
             p1_score -= 1
             p2_score += 3
 
         elif collision1r2:
             explosion1 = Explode(rocket1.rect.x,rocket1.rect.y)
-            rocket1 = Rocket(999,999,0,False,1)
+            rocket1.exists= False
             ship2.rect.x, ship2.rect.y = x*0.2, y*0.8
             p2_score -= 1
             p1_score += 3        
 
         elif collision3r1:
             explosion3 = Explode(rocket3.rect.x,rocket3.rect.y)
-            rocket3 = Rocket(999,999,0,False,3)
+            rocket3.exists= False
             ship1.rect.x, ship1.rect.y = x*0.8, y*0.8
             p1_score -= 1
             p3_score += 3
 
         elif collision3r2:
             explosion3 = Explode(rocket3.rect.x,rocket3.rect.y)
-            rocket3 = Rocket(999,999,0,False,3)
+            rocket3.exists= False
             ship2.rect.x, ship2.rect.y = x*0.2, y*0.8
             p2_score -= 1
             p3_score += 3
 
         elif collision2r3:
             explosion2 = Explode(rocket2.rect.x,rocket2.rect.y)
-            rocket2 = Rocket(999,999,0,False,2)
+            rocket2.exists= False
             ship3.rect.x, ship3.rect.y = x*0.1, y*0.1
             p3_score -= 1
             p2_score += 3
 
         elif collision1r3:
             explosion1 = Explode(rocket1.rect.x,rocket1.rect.y)
-            rocket1 = Rocket(999,999,0,False,1)
+            rocket1.exists= False
             ship3.rect.x, ship3.rect.y = x*0.1, y*0.1
             p3_score -= 1
             p1_score += 3    
 
         elif collision4r1:
             explosion4 = Explode(rocket4.rect.x,rocket4.rect.y)
-            rocket4 = Rocket(999,999,0,False,4)
+            rocket4.exists= False
             ship1.rect.x, ship1.rect.y = x*0.8, y*0.8
             p1_score -= 1
             p4_score += 3
 
         elif collision4r2:
             explosion4 = Explode(rocket4.rect.x,rocket4.rect.y)
-            rocket4 = Rocket(999,999,0,False,4)
+            rocket4.exists= False
             ship2.rect.x, ship2.rect.y = x*0.2, y*0.8
             p2_score -= 1
             p4_score += 3
 
         elif collision4r3:
             explosion4 = Explode(rocket4.rect.x,rocket4.rect.y)
-            rocket4 = Rocket(999,999,0,False,4)
+            rocket4.exists= False
             ship3.rect.x, ship3.rect.y = x*0.1, y*0.1
             p3_score -= 1
             p4_score += 3
 
         elif collision1r4:
             explosion1 = Explode(rocket1.rect.x,rocket1.rect.y)
-            rocket1 = Rocket(999,999,0,False,1)
+            rocket1.exists= False
             ship4.rect.x, ship4.rect.y = x*0.8, y*0.2
             p4_score -= 1
             p1_score += 3
 
         elif collision2r4:
             explosion2 = Explode(rocket2.rect.x,rocket2.rect.y)
-            rocket2 = Rocket(999,999,0,False,2)
+            rocket2.exists= False
             ship4.rect.x, ship4.rect.y = x*0.8, y*0.2
             p4_score -= 1
             p2_score += 3
 
         elif collision3r4:
             explosion3 = Explode(rocket3.rect.x,rocket3.rect.y)
-            rocket3 = Rocket(999,999,0,False,3)
+            rocket3.exists= False
             ship4.rect.x, ship4.rect.y = x*0.8, y*0.2
             p4_score -= 1
             p3_score += 3
@@ -782,21 +789,25 @@ def main(player_count=4):
                 # SHOOTING with UP
                 if (event.key == K_UP):
                     missileSound.play()
-                    rocket1 = Rocket(ship1.rect.x, ship1.rect.y,ship1.direction, True,1)
-                    all_sprites_list.add(rocket1)
+                    rocket1.rect.x, rocket1.rect.y = ship1.rect.x, ship1.rect.y
+                    rocket1.direction = ship1.direction
+                    rocket1.exists= True
+
                 if (event.key == K_w):
                     missileSound.play()
-                    rocket2 = Rocket(ship2.rect.x, ship2.rect.y,ship2.direction, True,2)
-                    all_sprites_list.add(rocket2)
+                    rocket2.rect.x, rocket2.rect.y = ship2.rect.x, ship2.rect.y
+                    rocket2.direction = ship2.direction
+                    rocket2.exists= True
                 if (event.key == K_i):
                     missileSound.play()
-                    rocket3 = Rocket(ship3.rect.x, ship3.rect.y,ship3.direction, True,3)
-                    all_sprites_list.add(rocket3)
+                    rocket3.rect.x, rocket3.rect.y = ship3.rect.x, ship3.rect.y
+                    rocket3.direction = ship3.direction
+                    rocket3.exists= True
                 if (event.key == K_t):
                     missileSound.play()
-                    rocket4 = Rocket(ship4.rect.x, ship4.rect.y,ship4.direction, True,4)
-                    all_sprites_list.add(rocket4)
-
+                    rocket4.rect.x, rocket4.rect.y = ship4.rect.x, ship4.rect.y
+                    rocket4.direction = ship3.direction
+                    rocket4.exists= True
                     
             elif event.type == KEYUP:
                 if (event.key == K_RIGHT):
