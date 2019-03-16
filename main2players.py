@@ -457,11 +457,13 @@ def main():
 
         
         #RESPAWN LUK_POWERUP
-        if frame_nr > frame_start + 300:
-            luk.alive = True
+        if frame_nr > frame_start + 150:
+            
             ship1.lukas = False
             ship2.lukas = False
             ship3.lukas = False
+        if frame_nr > frame_start + 500:
+            luk.alive = True
             
             
             
