@@ -357,23 +357,27 @@ def endgame(p1, p2, p3):
         pygame.display.update()
         fpsClock.tick(30)
 
-def main():
-    #textures.main()
+def main(main_players=2):
     pygame.mixer.pause()
     #INITIALIZE SHIPS AND DIRECTION
-    
+    all_sprites_list = pygame.sprite.Group()
+    rockets_list = pygame.sprite.Group()
+    ships_list = pygame.sprite.Group()
     x = SCREENWIDTH
     y = SCREENHEIGHT
-    ship1 = Ship(x*0.8, y*0.8,1) 
+    ship1 = Ship(x*0.8, y*0.8,1)
     ship2 = Ship(x*0.2, y*0.8,2)
     ship3 = Ship(x*0.1, y*0.1,3)
+
     rocket1 = Rocket(999,999,0,False,1)
     rocket2 = Rocket(999,999,0,False,2)
     rocket3 = Rocket(999,999,0,False,3)
+
     explosion = Explode(x+500,y+500)
     explosion1 = Explode(x+500,y+500)
     explosion2 = Explode(x+500,y+500)
     explosion3 = Explode(x+500,y+500)
+
     pygame.mixer.unpause()
 
     #INITIALIZE LUKAS POWERUP
