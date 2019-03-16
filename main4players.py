@@ -367,14 +367,17 @@ def endgame(p1, p2, p3, p4):
         pygame.display.update()
         fpsClock.tick(30)
 
-def main():
+def main(player_count=2):
     #INITIALIZE SHIPS AND DIRECTION
     x = SCREENWIDTH
     y = SCREENHEIGHT
     ship1 = Ship(x*0.8, y*0.8, 1) 
     ship2 = Ship(x*0.2, y*0.8, 2)
-    ship3 = Ship(x*0.1, y*0.1, 3)
-    ship4 = Ship(x*0.8, y*0.2, 4)
+    if player_count == 3:
+        ship3 = Ship(x*0.1, y*0.1, 3)
+    elif player_count == 4:
+        ship3 = Ship(x*0.1, y*0.1, 3)
+        ship4 = Ship(x*0.8, y*0.2, 4)
     rocket1 = Rocket(999,999,0,False,1)
     rocket2 = Rocket(999,999,0,False,2)
     rocket3 = Rocket(999,999,0,False,3)

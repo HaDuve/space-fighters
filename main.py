@@ -338,22 +338,22 @@ def choose_mode(playercount, player = 1):
                             save_stats(2)
                             save_stats(3)
                             save_stats(4)
-                            import main2players
-                            main2players.main()
+                            import main4players
+                            main4players.main(2)
                         if playercount == 3 and bool_money_3:
                             save_stats(1)
                             save_stats(2)
                             save_stats(3)
                             save_stats(4)
-                            import main3players
-                            main3players.main()
+                            import main4players
+                            main4players.main(3)
                         if playercount == 4 and bool_money_4:
                             save_stats(1)
                             save_stats(2)
                             save_stats(3)
                             save_stats(4)
                             import main4players
-                            main4players.main()
+                            main4players.main(4)
                     elif bool_money_1 and bool_money_2 and bool_money_3 and bool_money_4:
                         choose_mode(playercount, player + 1)
 
