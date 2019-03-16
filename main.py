@@ -354,7 +354,7 @@ def choose_mode(playercount, player = 1):
                             save_stats(4)
                             import main4players
                             main4players.main()
-                    elif bool_money_1:
+                    elif bool_money_1 and bool_money_2 and bool_money_3 and bool_money_4:
                         choose_mode(playercount, player + 1)
 
         pygame.display.update()
