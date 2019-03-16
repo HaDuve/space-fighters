@@ -125,18 +125,15 @@ rocketspeed = [int(STATS1[7]),int(STATS2[7]),int(STATS3[7]),int(STATS4[7])]
 
 print(shipspeed, maneuv, rocketspeed)
 
-class Player():
-    def __init__(self, number):
-        self.number = number
-        
+class Ship(pygame.sprite.Sprite):
 
-class Ship(Player):
-
-    
     def __init__(self, x,y,player):
-        
-        self.x = random.choice(range(7,10)) *x / 10
-        self.y = random.choice(range(7,10)) *y / 10
+        """ PYGAME STUFF HERE"""
+        super().__init__()
+
+
+        """ NON PYGAME STUFF HERE"""
+
         self.speed = shipspeed[player-1]
         self.direction = 0
         self.k_left = self.k_right = 0
@@ -145,7 +142,20 @@ class Ship(Player):
         self.boolean = False
         self.direc = ""
         self.alive = True
-               
+
+        """ MORE PYGAME STUFF"""
+        if self.player == 1:
+            self.image = pygame.transform.rotate(SHIP1, 0)
+        if self.player == 2:
+            self.image = pygame.transform.rotate(SHIP2, 0)
+        if self.player == 3:
+            self.image = pygame.transform.rotate(SHIP3, 0)
+        if self.player == 4:
+            self.image = pygame.transform.rotate(SHIP4, 0)
+        self.rect = self.image.get_rect()
+        self.rect.x = random.choice(range(7,10)) *x / 10
+        self.rect.y = random.choice(range(7,10)) *y / 10
+
     def respawntime(self):
         pass
         
@@ -161,33 +171,34 @@ class Ship(Player):
             self.direction += (self.k_left + self.k_right)
             
             rad = self.direction * math.pi / 180
-            self.x += -self.speed*math.sin(rad)
-            self.y += -self.speed*math.cos(rad)
+            self.rect.x += -self.speed*math.sin(rad)
+            self.rect.y += -self.speed*math.cos(rad)
 
-            if self.x > SCREENWIDTH:
-                self.x = 0
-            if self.x < 0:
-                self.x = SCREENWIDTH
-            if self.y > SCREENHEIGHT:
-                self.y = 0
-            if self.y < 0:
-                self.y = SCREENHEIGHT
+            if self.rect.x > SCREENWIDTH:
+                self.rect.x = 0
+            if self.rect.x < 0:
+                self.rect.x = SCREENWIDTH
+            if self.rect.y > SCREENHEIGHT:
+                self.rect.y = 0
+            if self.rect.y < 0:
+                self.rect.y = SCREENHEIGHT
 
             
 
             if self.player == 1:
-                image = pygame.transform.rotate(SHIP1, self.direction)
+                self.image = pygame.transform.rotate(SHIP1, self.direction)
             if self.player == 2:
-                image = pygame.transform.rotate(SHIP2, self.direction)
+                self.image = pygame.transform.rotate(SHIP2, self.direction)
             if self.player == 3:
-                image = pygame.transform.rotate(SHIP3, self.direction)
+                self.image = pygame.transform.rotate(SHIP3, self.direction)
+            self.rect = self.image.get_rect()
                 
-            DISPLAY.blit(image,(self.x,self.y))
+            DISPLAY.blit(self.image,(self.rect.x,self.rect.y))
 
             #RETURN rad to ZERO
             rad = 0
         else:
-            self.x = self.y = SCREENWIDTH * self.player
+            self.rect.x = self.rect.y = SCREENWIDTH * self.player
         
     def change_angle(self, direc, luka):
         
@@ -219,52 +230,66 @@ class Ship(Player):
                 self.k_left += m
 
             
-class Rocket():
+class Rocket(pygame.sprite.Sprite):
     
     def __init__(self,x,y,direction,exists,player):
-        self.x = x
-        self.y =y
-        self.speed=1
+        super().__init__()
+        self.player = player
         self.direction= direction
         self.exists = exists
+        if self.player == 1:
+            self.image = pygame.transform.rotate(ROCKET1, 0)
+        if self.player == 2:
+            self.image = pygame.transform.rotate(ROCKET2, 0)
+        if self.player == 3:
+            self.image = pygame.transform.rotate(ROCKET3, 0)
+        self.rect = self.image.get_rect()
+        self.rect.x = x
+        self.rect.y = y
+        self.speed=1
 
-        self.player = player
+
+
+
         
     def move(self):
         if self.exists:
             if self.speed < rocketspeed[self.player-1]:
                 self.speed+= self.speed*0.1 +0.7
-            if self.x > SCREENWIDTH and self.x < 1500:
-                self.x = 0
-            if self.x < 0 and self.x > -1500:
-                self.x = SCREENWIDTH
-            if self.y > SCREENHEIGHT and self.y < 1500:
-                self.y = 0
-            if self.y < 0 and self.y > -1500:
-                self.y = SCREENHEIGHT
+            if self.rect.x > SCREENWIDTH and self.rect.x < 1500:
+                self.rect.x = 0
+            if self.rect.x < 0 and self.rect.x > -1500:
+                self.rect.x = SCREENWIDTH
+            if self.rect.y > SCREENHEIGHT and self.rect.y < 1500:
+                self.rect.y = 0
+            if self.rect.y < 0 and self.rect.y > -1500:
+                self.rect.y = SCREENHEIGHT
         else:
-            self.x = self.y = SCREENWIDTH + 500
+            self.rect.x = self.rect.y = SCREENWIDTH + 500
             self.speed = 0
         rad = self.direction * math.pi / 180
-        self.x += -self.speed*math.sin(rad)
-        self.y += -self.speed*math.cos(rad)
+        self.rect.x += -self.speed*math.sin(rad)
+        self.rect.y += -self.speed*math.cos(rad)
         if self.player == 1:
-            image = pygame.transform.rotate(ROCKET1, self.direction)
+            self.image = pygame.transform.rotate(ROCKET1, self.direction)
         if self.player == 2:
-            image = pygame.transform.rotate(ROCKET2, self.direction)
+            self.image = pygame.transform.rotate(ROCKET2, self.direction)
         if self.player == 3:
-            image = pygame.transform.rotate(ROCKET3, self.direction)
+            self.image = pygame.transform.rotate(ROCKET3, self.direction)
+        self.rect = self.image.get_rect()
         if self.exists:
-            DISPLAY.blit(image,(self.x,self.y))
+            DISPLAY.blit(self.image,(self.rect.x,self.rect.y))
 
-class Explode():
+class Explode(pygame.sprite.Sprite):
     def __init__(self,x,y):
-        self.x = x
-        self.y = y
+        self.image = EXPLOSION
+        self.rect = self.image.get_rect()
+        self.rect.x = x
+        self.rect.y = y
         explosionSound.play()
     def update(self):
         
-        DISPLAY.blit(EXPLOSION,(self.x,self.y))
+        DISPLAY.blit(EXPLOSION,(self.rect.x,self.rect.y))
         
 
 def respawn(x,y):
@@ -273,20 +298,22 @@ def respawn(x,y):
 
 
 
-class Luk_powerup():
+class Luk_powerup(pygame.sprite.Sprite):
     
     def __init__(self,x=400,y=400):
-        self.x = x
-        self.y = y
+        self.image = EXPLOSION
+        self.rect = self.image.get_rect()
+        self.rect.x = x
+        self.rect.y = y
         self.alive = True
 
     def update(self, frame):
         if self.alive:
-            if self.x > SCREENWIDTH:
-                self.x = 0
-            self.x += 0.8 
-            self.y += 0
-            DISPLAY.blit(LUKASPOWERUP,(self.x,self.y))
+            if self.rect.x > SCREENWIDTH:
+                self.rect.x = 0
+            self.rect.x += 0.8
+            self.rect.y += 0
+            DISPLAY.blit(LUKASPOWERUP,(self.rect.x,self.rect.y))
 
 
 def endgame(p1, p2, p3):
