@@ -1,9 +1,6 @@
 #!/usr/bin/env python
 import sys
 import pygame
-
-
-import main4players
 from pygame.locals import *
 
 #INITIALIZE
@@ -240,9 +237,13 @@ def choose_mode(playercount, player = 1):
         DISPLAY.blit(BACKGROUND,(0,0))        
 
         points_pl1 = " Money left for Upgrades :  " + str(STATS1[3]) + " $ "
+        bool_money_1 = STATS1[3] >= 0
         points_pl2 = " Money left for Upgrades :  " + str(STATS2[3]) + " $ "
+        bool_money_2 = STATS2[3] >= 0
         points_pl3 = " Money left for Upgrades :  " + str(STATS3[3]) + " $ "
+        bool_money_3 = STATS3[3] >= 0
         points_pl4 = " Money left for Upgrades :  " + str(STATS4[3]) + " $ "
+        bool_money_4 = STATS4[3] >= 0
         stats_text1 = stats_text2 = stats_text3 = player_txt1_ = points_txt_ = ""
         
         if player == 1:
@@ -332,28 +333,28 @@ def choose_mode(playercount, player = 1):
 
                 if event.key == K_RETURN:
                     if player == playercount:                        
-                        if playercount == 2:
+                        if playercount == 2 and bool_money_2:
                             save_stats(1)
                             save_stats(2)
                             save_stats(3)
                             save_stats(4)
                             import main2players
                             main2players.main()
-                        if playercount == 3:
+                        if playercount == 3 and bool_money_3:
                             save_stats(1)
                             save_stats(2)
                             save_stats(3)
                             save_stats(4)
                             import main3players
                             main3players.main()
-                        if playercount == 4:
+                        if playercount == 4 and bool_money_4:
                             save_stats(1)
                             save_stats(2)
                             save_stats(3)
                             save_stats(4)
                             import main4players
                             main4players.main()
-                    else:
+                    elif bool_money_1:
                         choose_mode(playercount, player + 1)
 
         pygame.display.update()
