@@ -16,7 +16,7 @@ pygame.display.set_caption("SpaceFighters")
 pygame.display.set_icon(pygame.image.load('resources/ship1big.png'))
 fpsClock = pygame.time.Clock()
 pygame.mouse.set_visible(0)
-pygame.key.set_repeat(1,10)
+pygame.key.set_repeat(1, 10)
 frame_nr = frame_start = frame_start2= 0
 
 #SOUNDS
@@ -271,7 +271,7 @@ def respawn(x,y):
     #explode(x,y)
     pass
 
-#TODO THIS 2 FUNCTIONS WITH EFFECTS
+
 
 class Luk_powerup():
     
