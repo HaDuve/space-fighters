@@ -144,13 +144,13 @@ class Ship(pygame.sprite.Sprite):
 
         """ MORE PYGAME STUFF"""
         if self.player == 1:
-            self.image = pygame.transform.rotate(SHIP1, 0)
+            self.image = SHIP1
         if self.player == 2:
-            self.image = pygame.transform.rotate(SHIP2, 0)
+            self.image = SHIP2
         if self.player == 3:
-            self.image = pygame.transform.rotate(SHIP3, 0)
+            self.image = SHIP3
         if self.player == 4:
-            self.image = pygame.transform.rotate(SHIP4, 0)
+            self.image = SHIP4
         self.rect = self.image.get_rect()
         self.rect.x = random.choice(range(7,10)) *x / 10
         self.rect.y = random.choice(range(7,10)) *y / 10
@@ -185,13 +185,13 @@ class Ship(pygame.sprite.Sprite):
 
 
             if self.player == 1:
-                DISPLAY.blit(pygame.transform.rotate(SHIP1, self.direction),(self.rect.x,self.rect.y))
+                self.image=(pygame.transform.rotate(SHIP1, self.direction))
             if self.player == 2:
-                DISPLAY.blit(pygame.transform.rotate(SHIP2, self.direction),(self.rect.x,self.rect.y))
+                self.image=(pygame.transform.rotate(SHIP2, self.direction))
             if self.player == 3:
-                DISPLAY.blit(pygame.transform.rotate(SHIP3, self.direction),(self.rect.x,self.rect.y))
+                self.image=(pygame.transform.rotate(SHIP3, self.direction))
             if self.player == 4:
-                DISPLAY.blit(pygame.transform.rotate(SHIP4, self.direction),(self.rect.x,self.rect.y))
+                self.image=(pygame.transform.rotate(SHIP4, self.direction))
             #self.rect = self.image.get_rect()
 
 
@@ -239,13 +239,13 @@ class Rocket(pygame.sprite.Sprite):
         self.direction= direction
         self.exists = exists
         if self.player == 1:
-            self.image = pygame.transform.rotate(ROCKET1, 0)
+            self.image = ROCKET1
         if self.player == 2:
-            self.image = pygame.transform.rotate(ROCKET2, 0)
+            self.image = ROCKET2
         if self.player == 3:
-            self.image = pygame.transform.rotate(ROCKET3, 0)
+            self.image = ROCKET3
         if self.player == 4:
-            self.image = pygame.transform.rotate(ROCKET4, 0)
+            self.image = ROCKET4
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
@@ -281,9 +281,9 @@ class Rocket(pygame.sprite.Sprite):
             self.image = pygame.transform.rotate(ROCKET3, self.direction)
         if self.player == 4:
             self.image = pygame.transform.rotate(ROCKET3, self.direction)
-        self.rect = self.image.get_rect()
-        if self.exists:
-            DISPLAY.blit(self.image,(self.rect.x,self.rect.y))
+
+        # if self.exists:
+        #     DISPLAY.blit(self.image,(self.rect.x,self.rect.y))
 
 class Explode(pygame.sprite.Sprite):
     def __init__(self,x,y):
@@ -293,9 +293,9 @@ class Explode(pygame.sprite.Sprite):
         self.rect.x = x
         self.rect.y = y
         explosionSound.play()
-    def update(self):
-
-        DISPLAY.blit(EXPLOSION,(self.rect.x,self.rect.y))
+    # def update(self):
+    #
+    #     DISPLAY.blit(EXPLOSION,(self.rect.x,self.rect.y))
 
 
 def respawn(x,y):
@@ -320,7 +320,7 @@ class Luk_powerup(pygame.sprite.Sprite):
                 self.rect.x = 0
             self.rect.x += 0.8
             self.rect.y += 0
-            DISPLAY.blit(LUKASPOWERUP,(self.rect.x,self.rect.y))
+            #DISPLAY.blit(LUKASPOWERUP,(self.rect.x,self.rect.y))
 
 
 def endgame(p1, p2, p3, p4):
@@ -369,7 +369,7 @@ def endgame(p1, p2, p3, p4):
         pygame.display.update()
         fpsClock.tick(30)
 
-def main(player_count=2):
+def main(player_count=4):
     #INITIALIZE SHIPS AND DIRECTION
     x = SCREENWIDTH
     y = SCREENHEIGHT
@@ -410,7 +410,7 @@ def main(player_count=2):
     all_sprites_list.add(explosion2)
     all_sprites_list.add(explosion3)
     all_sprites_list.add(explosion4)
-    all_sprites_list.add(luk)
+
     #INITIALIZE POINTS FOR PLAYERS
     p1_score = 0
     p2_score = 0
@@ -450,6 +450,7 @@ def main(player_count=2):
             luk.rect.x = (random.choice(range(0,10)) * 80)
             luk.rect.y = (random.choice(range(0,10)) * 60)
         if frame_nr > 300 and not luk_initialized:
+            all_sprites_list.add(luk)
             luk.alive = True
             luk_initialized = True
         
