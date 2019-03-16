@@ -301,7 +301,7 @@ def respawn(x,y):
 class Luk_powerup(pygame.sprite.Sprite):
     
     def __init__(self,x=400,y=400):
-        self.image = EXPLOSION
+        self.image = LUKASPOWERUP
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y

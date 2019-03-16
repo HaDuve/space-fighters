@@ -73,8 +73,8 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/main2players.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="217">
-                  <caret line="303" column="30" lean-forward="true" selection-start-line="303" selection-start-column="30" selection-end-line="303" selection-end-column="30" />
+                <state relative-caret-position="211">
+                  <caret line="307" column="25" lean-forward="true" selection-start-line="307" selection-start-column="25" selection-end-line="307" selection-end-column="25" />
                 </state>
               </provider>
             </entry>
@@ -128,6 +128,7 @@
       <find>self.x</find>
       <find>self.y</find>
       <find>image</find>
+      <find>rocket</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -304,8 +305,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/main2players.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="217">
-          <caret line="303" column="30" lean-forward="true" selection-start-line="303" selection-start-column="30" selection-end-line="303" selection-end-column="30" />
+        <state relative-caret-position="211">
+          <caret line="307" column="25" lean-forward="true" selection-start-line="307" selection-start-column="25" selection-end-line="307" selection-end-column="25" />
         </state>
       </provider>
     </entry>
