@@ -12,7 +12,7 @@ pygame.display.set_caption("SpaceFighters")
 pygame.display.set_icon(pygame.image.load('resources/ship1.png'))
 fpsClock = pygame.time.Clock()
 pygame.mouse.set_visible(0)
-pygame.key.set_repeat(100,100)
+pygame.key.set_repeat(100, 100)
 CURSOR_ROW = 1
 CURSOR   = pygame.image.load('resources/cursor.png')
 
@@ -229,6 +229,7 @@ def down_stat(player_nr):
             if STATS4[3] < 1: STATS4[3] = 1
             
     calc_points(player_nr)
+
 
 def choose_mode(playercount, player = 1):   
     while 1:

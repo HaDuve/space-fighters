@@ -111,6 +111,8 @@ def load_stats(player_nr):
     
         return stats
 
+
+# INITIALIZE STATS OF THE SHIPS
 STATS1 = load_stats(1)
 STATS2 = load_stats(2)
 STATS3 = load_stats(3)
@@ -123,15 +125,10 @@ maneuv = [int(STATS1[4]),int(STATS2[4]),int(STATS3[4]),int(STATS4[4])]
 rocketspeed = [int(STATS1[7]),int(STATS2[7]),int(STATS3[7]),int(STATS4[7])]
 
 print(shipspeed, maneuv, rocketspeed)
-    
-class Player():
-    def __init__(self, number):
-        self.number = number
-        
+
 
 class Ship(Player):
 
-    
     def __init__(self, x,y,player):
         
         self.x = random.choice(range(5,11)) *x / 10
@@ -147,14 +144,13 @@ class Ship(Player):
                
     def respawntime(self):
         pass
-        
-        
+
     def move(self):
-        #CHANGE THIS EQUATION TO CANCEL OUT PLAYERS
+        # CHANGE THIS EQUATION TO CANCEL OUT PLAYERS
         x = 0
         if self.player == x:
             self.alive = False
-        #COMPUTE NEW x and y
+        # COMPUTE NEW x and y
         if self.alive:
             self.direction = 0
             self.direction += (self.k_left + self.k_right)
@@ -569,7 +565,7 @@ def main():
         
         #KOLLISIONS Check #######
         if False: #dont change this plz // MAYBE ALL ELIFS SHOULD BE IFS!!
-            nothing = 0
+            pass
 
         #SHIP COLLISIONS
         elif collision12:
