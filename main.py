@@ -40,11 +40,11 @@ GREEN = (84,155,70)
 ORANGE =(255,150,0)
 
 #STATS to be modified and imported
-#[ShipSpeed, Maneuverability, RocketSpeed, MoneyLeft]
-STATS1 = [1,1,1,1000]
-STATS2 = [1,1,1,1000]
-STATS3 = [1,1,1,1000]
-STATS4 = [1,1,1,1000]
+#[ShipSpeed, Maneuverability, RocketSpeed, MoneyLeft, SuperWeapon]
+STATS1 = [1,1,1,1000, 1]
+STATS2 = [1,1,1,1000, 1]
+STATS3 = [1,1,1,1000, 1]
+STATS4 = [1,1,1,1000, 1]
 
 def save_stats(player_nr):
     global STATS1
@@ -73,10 +73,10 @@ def reset_all_stats():
     global STATS2
     global STATS3
     global STATS4
-    STATS1 = [1,1,1,1000]
-    STATS2 = [1,1,1,1000]
-    STATS3 = [1,1,1,1000]
-    STATS4 = [1,1,1,1000]
+    STATS1 = [1,1,1,1000, 1]
+    STATS2 = [1,1,1,1000, 1]
+    STATS3 = [1,1,1,1000, 1]
+    STATS4 = [1,1,1,1000, 1]
     for i in range(1,5):
         try:
             resetfile = open("stats"+str(i)+".txt", 'r+')
@@ -128,8 +128,8 @@ def up_stat(player_nr):
             STATS1[2] += 1
             if STATS1[2] > 9: STATS1[2] = 9
         if CURSOR_ROW == 4:
-            STATS1[3] += 1
-            if STATS1[3] > 9: STATS1[3] = 9
+            STATS1[4] += 1
+            if STATS1[4] > 3: STATS1[4] = 3
     if player_nr ==2:            
         if CURSOR_ROW == 1:
             STATS2[0] += 1
@@ -141,7 +141,8 @@ def up_stat(player_nr):
             STATS2[2] += 1
             if STATS2[2] > 9: STATS2[2] = 9
         if CURSOR_ROW == 4:
-            STATS2[3] += 1
+            STATS2[4] += 1
+            if STATS2[4] > 3: STATS2[4] = 3
     if player_nr ==3:            
         if CURSOR_ROW == 1:
             STATS3[0] += 1
@@ -153,7 +154,8 @@ def up_stat(player_nr):
             STATS3[2] += 1
             if STATS3[2] > 9: STATS3[2] = 9
         if CURSOR_ROW == 4:
-            STATS3[3] += 1
+            STATS3[4] += 1
+            if STATS3[4] > 3: STATS3[4] = 3
     if player_nr ==4:            
         if CURSOR_ROW == 1:
             STATS4[0] += 1
@@ -165,7 +167,8 @@ def up_stat(player_nr):
             STATS4[2] += 1
             if STATS4[2] > 9: STATS4[2] = 9
         if CURSOR_ROW == 4:
-            STATS4[3] += 1
+            STATS4[4] += 1
+            if STATS4[4] > 3: STATS4[4] = 3
 
     calc_points(player_nr)
         
@@ -187,7 +190,8 @@ def down_stat(player_nr):
             STATS1[2] -= 1
             if STATS1[2] < 1: STATS1[2] = 1
         if CURSOR_ROW == 4:
-            STATS1[3] -= 1
+            STATS1[4] -= 1
+            if STATS1[4] < 1: STATS1[4] = 1
     if player_nr ==2:            
         if CURSOR_ROW == 1:
             STATS2[0] -= 1
@@ -199,8 +203,8 @@ def down_stat(player_nr):
             STATS2[2] -= 1
             if STATS2[2] < 1: STATS2[2] = 1
         if CURSOR_ROW == 4:
-            STATS2[3] -= 1
-            if STATS2[3] < 1: STATS2[3] = 1
+            STATS2[4] -= 1
+            if STATS2[4] < 1: STATS2[4] = 1
     if player_nr ==3:            
         if CURSOR_ROW == 1:
             STATS3[0] -= 1
@@ -212,8 +216,8 @@ def down_stat(player_nr):
             STATS3[2] -= 1
             if STATS3[2] < 1: STATS3[2] = 1
         if CURSOR_ROW == 4:
-            STATS3[3] -= 1
-            if STATS3[3] < 1: STATS3[3] = 1
+            STATS3[4] -= 1
+            if STATS3[4] < 1: STATS3[4] = 1
     if player_nr ==4:            
         if CURSOR_ROW == 1:
             STATS4[0] -= 1
@@ -225,8 +229,8 @@ def down_stat(player_nr):
             STATS4[2] -= 1
             if STATS4[2] < 1: STATS4[2] = 1
         if CURSOR_ROW == 4:
-            STATS4[3] -= 1
-            if STATS4[3] < 1: STATS4[3] = 1
+            STATS4[4] -= 1
+            if STATS4[4] < 1: STATS4[4] = 1
             
     calc_points(player_nr)
 
