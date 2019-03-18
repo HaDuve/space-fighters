@@ -23,8 +23,10 @@ frame_nr = frame_start = frame_start2 = 0
 missileSound = pygame.mixer.Sound('resources/missile.wav')
 explosionSound = pygame.mixer.Sound('resources/explosion.wav')
 # CONSTANTS
+PLAYERS = 2
 
 # Fonts
+SPACEFONT = pygame.font.Font('resources/space.ttf', 34)
 BIGFONT = pygame.font.Font('font.ttf', 30)
 FONT = pygame.font.Font('font.ttf', 16)
 SMALLFONT = pygame.font.Font('font.ttf', 9)
@@ -56,7 +58,7 @@ def load_stats(player_nr):
     if player_nr == 1:
         try:
             high_score_file = open("stats1.txt", "r")
-            stats = str(high_score_file.read())
+            stats = high_score_file.read()
             high_score_file.close()
         except IOError:
             # Error reading file, no high score
@@ -69,7 +71,7 @@ def load_stats(player_nr):
     if player_nr == 2:
         try:
             high_score_file = open("stats2.txt", "r")
-            stats = str(high_score_file.read())
+            stats = high_score_file.read()
             high_score_file.close()
         except IOError:
             # Error reading file, no high score
@@ -82,7 +84,7 @@ def load_stats(player_nr):
     if player_nr == 3:
         try:
             high_score_file = open("stats3.txt", "r")
-            stats = str(high_score_file.read())
+            stats = high_score_file.read()
             high_score_file.close()
         except IOError:
             # Error reading file, no high score
@@ -95,7 +97,7 @@ def load_stats(player_nr):
     if player_nr == 4:
         try:
             high_score_file = open("stats4.txt", "r")
-            stats = str(high_score_file.read())
+            stats = high_score_file.read()
             high_score_file.close()
         except IOError:
             # Error reading file, no high score
@@ -108,17 +110,18 @@ def load_stats(player_nr):
 
 
 # INITIALIZE STATS OF THE SHIPS
-STATS1 = load_stats(1)
-STATS2 = load_stats(2)
-STATS3 = load_stats(3)
-STATS4 = load_stats(4)
 
-print(STATS1, STATS2, STATS3, STATS4)
+STATS1 = []
+STATS2 = []
+STATS3 = []
+STATS4 = []
 
-shipspeed = [int(STATS1[1]), int(STATS2[1]), int(STATS3[1]), int(STATS4[1])]
-maneuv = [int(STATS1[4]), int(STATS2[4]), int(STATS3[4]), int(STATS4[4])]
-rocketspeed = [int(STATS1[7]), int(STATS2[7]), int(STATS3[7]), int(STATS4[7])]
-superweapon = [int(STATS1[-2]), int(STATS2[-2]), int(STATS3[-2]), int(STATS4[-2])]
+
+
+shipspeed = []
+maneuv = []
+rocketspeed = []
+superweapon = []
 
 print(shipspeed, maneuv, rocketspeed, superweapon)
 
@@ -126,7 +129,7 @@ print(shipspeed, maneuv, rocketspeed, superweapon)
 class Ship:
 
     def __init__(self, x, y, player):
-
+        self.image = SHIP1
         self.x = random.choice(range(5, 11)) * x / 10
         self.y = random.choice(range(5, 11)) * y / 10
         self.speed = shipspeed[player - 1]
@@ -142,9 +145,9 @@ class Ship:
         pass
 
     def move(self):
-        # CHANGE THIS EQUATION TO CANCEL OUT PLAYERS
-        x = 0
-        if self.player == x:
+        # CANCEL OUT PLAYERS
+
+        if self.player > PLAYERS:
             self.alive = False
         # COMPUTE NEW x and y
         if self.alive:
@@ -166,12 +169,16 @@ class Ship:
 
             if self.player == 1:
                 image = pygame.transform.rotate(SHIP1, self.direction)
+                self.image = image
             if self.player == 2:
                 image = pygame.transform.rotate(SHIP2, self.direction)
+                self.image = image
             if self.player == 3:
                 image = pygame.transform.rotate(SHIP3, self.direction)
+                self.image = image
             if self.player == 4:
                 image = pygame.transform.rotate(SHIP4, self.direction)
+                self.image = image
 
             DISPLAY.blit(image, (self.x, self.y))
 
@@ -324,14 +331,61 @@ def endgame(p1, p2, p3, p4):
         fpsClock.tick(30)
 
 
+def intro(ships):
+    main_txt1 = "ready up"
+    done = False
+    i = SCREENHEIGHT
+    while not done and i > 102:
+        if i > 100:
+            i -= 1
+        DISPLAY.fill(BLACK)
+        DISPLAY.blit(BACKGROUND,(0,0))
+
+        p1_txt = SPACEFONT.render(main_txt1, True, WHITE)
+        DISPLAY.blit(p1_txt,(200, i))
+
+        for ship in ships:
+            if ship.alive:
+                DISPLAY.blit(ship.image, (ship.x, ship.y))
+
+
+        pygame.display.update()
+        fpsClock.tick(60)
+
+
 def main():
+    global STATS1
+    global STATS2
+    global STATS3
+    global STATS4
+    global shipspeed, maneuv, rocketspeed, superweapon
+    STATS1 = load_stats(1)
+    STATS2 = load_stats(2)
+    STATS3 = load_stats(3)
+    STATS4 = load_stats(4)
+    print(STATS1, STATS2, STATS3, STATS4)
+    shipspeed = [int(STATS1[1]), int(STATS2[1]), int(STATS3[1]), int(STATS4[1])]
+    maneuv = [int(STATS1[4]), int(STATS2[4]), int(STATS3[4]), int(STATS4[4])]
+    rocketspeed = [int(STATS1[7]), int(STATS2[7]), int(STATS3[7]), int(STATS4[7])]
+    superweapon = [int(STATS1[-2]), int(STATS2[-2]), int(STATS3[-2]), int(STATS4[-2])]
+    print(shipspeed, maneuv, rocketspeed, superweapon)
+
     # INITIALIZE SHIPS AND DIRECTION
+    explosionSound.set_volume(0)
+    missileSound.set_volume(0)
     x = SCREENWIDTH
     y = SCREENHEIGHT
     ship1 = Ship(x * 0.8, y * 0.8, 1)
     ship2 = Ship(x * 0.2, y * 0.8, 2)
     ship3 = Ship(x * 0.1, y * 0.1, 3)
     ship4 = Ship(x * 0.8, y * 0.2, 4)
+    ship1.move()
+    ship2.move()
+    ship3.move()
+    ship4.move()
+
+
+
     rocket1 = Rocket(999, 999, 0, False, 1)
     rocket2 = Rocket(999, 999, 0, False, 2)
     rocket3 = Rocket(999, 999, 0, False, 3)
@@ -341,7 +395,8 @@ def main():
     explosion2 = Explode(x + 500, y + 500)
     explosion3 = Explode(x + 500, y + 500)
     explosion4 = Explode(x + 500, y + 500)
-    # pygame.mixer.unpause()
+    explosionSound.set_volume(0.5)
+    missileSound.set_volume(0.3)
 
     # INITIALIZE LUKAS POWERUP
     luk = Luk_powerup()
@@ -355,7 +410,10 @@ def main():
     p4_score = 0
 
     frame_nr = frame_start = frame_start1 = frame_start2 = frame_start3 = 0
+
     # MAINLOOP
+
+    intro([ship1, ship2, ship3, ship4])
     while 1:
 
         frame_nr += 1

@@ -18,7 +18,11 @@ CURSOR   = pygame.image.load('resources/cursor.png')
 
 #CONSTANTS
 
+# BG Music
+pygame.mixer.music.load("resources/bg_music.mp3")
+
 #Fonts
+SPACEFONT = pygame.font.Font('resources/space.ttf', 34)
 BIGFONT = pygame.font.Font('font.ttf', 34)
 MEDFONT = pygame.font.Font('font.ttf', 28)
 FONT = pygame.font.Font('font.ttf', 16)
@@ -45,6 +49,8 @@ STATS1 = [1,1,1,1000, 1]
 STATS2 = [1,1,1,1000, 1]
 STATS3 = [1,1,1,1000, 1]
 STATS4 = [1,1,1,1000, 1]
+
+
 
 def save_stats(player_nr):
     global STATS1
@@ -238,6 +244,11 @@ def down_stat(player_nr):
 def choose_mode(playercount, player = 1):   
     while 1:
         global CURSOR_ROW
+        global STATS1
+        global STATS2
+        global STATS3
+        global STATS4
+
         DISPLAY.fill(BLACK)
         DISPLAY.blit(BACKGROUND,(0,0))        
 
@@ -343,21 +354,25 @@ def choose_mode(playercount, player = 1):
                             save_stats(2)
                             save_stats(3)
                             save_stats(4)
-                            import main2players
-                            main2players.main()
+
+                            import main4players
+                            main4players.PLAYERS = 2
+                            main4players.main()
                         if playercount == 3 and bool_money_3:
                             save_stats(1)
                             save_stats(2)
                             save_stats(3)
                             save_stats(4)
-                            import main3players
-                            main3players.main()
+                            import main4players
+                            main4players.PLAYERS = 3
+                            main4players.main()
                         if playercount == 4 and bool_money_4:
                             save_stats(1)
                             save_stats(2)
                             save_stats(3)
                             save_stats(4)
                             import main4players
+                            main4players.PLAYERS = 4
                             main4players.main()
                     elif bool_money_1 and bool_money_2 and bool_money_3 and bool_money_4:
                         choose_mode(playercount, player + 1)
@@ -365,13 +380,33 @@ def choose_mode(playercount, player = 1):
         pygame.display.update()
         fpsClock.tick(60)
 
+def intro():
+    main_txt1 = "spacefighters"
+    done = False
+    i = SCREENHEIGHT
+    while not done and i > 102:
+        if i > 100:
+            i-=1
+        DISPLAY.fill(BLACK)
+        DISPLAY.blit(BACKGROUND,(0,0))
 
+        p1_txt = SPACEFONT.render((main_txt1), True, WHITE)
+        DISPLAY.blit(p1_txt,(200, i))
+        for event in pygame.event.get():
+            if not hasattr(event, 'key'): continue
 
+            #QUIT Event
+            elif event.type == KEYDOWN:
+                done = True
+        pygame.display.update()
+        fpsClock.tick(60)
 
 def main():
-    
+    global PLAYERS
     #MAINLOOP
+    intro()
     reset_all_stats()
+    pygame.mixer.music.play(0,0)
 
     while 1:
         DISPLAY.fill(BLACK)
@@ -379,21 +414,21 @@ def main():
 
         
         #DRAW MAIN MENUE
-        main_txt1 = " S P A C E  F I G H T E R S "
+        main_txt1 = "spacefighters"
         main_txt2 = (" # PLAYERS?   --"+
         "--  KEYS:  P1( left | up | right )  P2( a | w | d )  P3( j | i | l )  P4( f | t | h )")
         main_txt3 = " (2) "
         main_txt4 = " (3) "
         main_txt5 = " (4) "        
-        p1_txt = BIGFONT.render((main_txt1), True, WHITE, BLACK)
-        DISPLAY.blit(p1_txt,(100, 100))
-        p2_txt = FONT.render((main_txt2), True, WHITE, BLACK)
+        p1_txt = SPACEFONT.render((main_txt1), True, WHITE)
+        DISPLAY.blit(p1_txt,(200, 100))
+        p2_txt = FONT.render((main_txt2), True, WHITE)
         DISPLAY.blit(p2_txt,(100, 250))
-        p3_txt = FONT.render((main_txt3), True, WHITE, BLACK)
+        p3_txt = FONT.render((main_txt3), True, WHITE)
         DISPLAY.blit(p3_txt,(150, 325))
-        p4_txt = FONT.render((main_txt4), True, WHITE, BLACK)
+        p4_txt = FONT.render((main_txt4), True, WHITE)
         DISPLAY.blit(p4_txt,(150, 400))
-        p5_txt = FONT.render((main_txt5), True, WHITE, BLACK)
+        p5_txt = FONT.render((main_txt5), True, WHITE)
         DISPLAY.blit(p5_txt,(150, 475))
         
         DISPLAY.blit(SHIP1,(180,325))
@@ -420,12 +455,15 @@ def main():
                 # Choose Players
                 
                 if (event.key == K_2):
+                    PLAYERS = 2
                     choose_mode(2)
                     
                 if (event.key == K_3):
+                    PLAYERS = 3
                     choose_mode(3)
                                         
                 if (event.key == K_4):
+                    PLAYERS = 4
                     choose_mode(4)
                     
 
