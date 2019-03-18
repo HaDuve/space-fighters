@@ -15,8 +15,8 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/main.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-4539">
-                  <caret line="36" lean-forward="true" selection-start-line="36" selection-end-line="36" />
+                <state relative-caret-position="346">
+                  <caret line="408" column="4" selection-start-line="408" selection-start-column="4" selection-end-line="408" selection-end-column="32" />
                   <folding>
                     <element signature="e#22#32#0" expanded="true" />
                   </folding>
@@ -31,11 +31,11 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/main4players.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="289">
-                  <caret line="344" column="37" lean-forward="true" selection-start-line="344" selection-start-column="37" selection-end-line="344" selection-end-column="37" />
+                <state relative-caret-position="446">
+                  <caret line="383" column="57" lean-forward="true" selection-start-line="383" selection-start-column="57" selection-end-line="383" selection-end-column="57" />
                   <folding>
                     <element signature="e#22#32#0" expanded="true" />
-                    <marker date="1552923126312" expanded="true" signature="8075:8080" ph="..." />
+                    <marker date="1552924611186" expanded="true" signature="8125:8130" ph="..." />
                   </folding>
                 </state>
               </provider>
@@ -233,8 +233,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-4539">
-          <caret line="36" lean-forward="true" selection-start-line="36" selection-end-line="36" />
+        <state relative-caret-position="346">
+          <caret line="408" column="4" selection-start-line="408" selection-start-column="4" selection-end-line="408" selection-end-column="32" />
           <folding>
             <element signature="e#22#32#0" expanded="true" />
           </folding>
@@ -243,11 +243,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/main4players.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="344" column="37" lean-forward="true" selection-start-line="344" selection-start-column="37" selection-end-line="344" selection-end-column="37" />
+        <state relative-caret-position="446">
+          <caret line="383" column="57" lean-forward="true" selection-start-line="383" selection-start-column="57" selection-end-line="383" selection-end-column="57" />
           <folding>
             <element signature="e#22#32#0" expanded="true" />
-            <marker date="1552923126312" expanded="true" signature="8075:8080" ph="..." />
+            <marker date="1552924611186" expanded="true" signature="8125:8130" ph="..." />
           </folding>
         </state>
       </provider>

@@ -20,6 +20,7 @@ pygame.key.set_repeat(1, 10)
 frame_nr = frame_start = frame_start2 = 0
 
 # SOUNDS
+pygame.mixer.music.load("resources/bg_music.mp3")
 missileSound = pygame.mixer.Sound('resources/missile.wav')
 explosionSound = pygame.mixer.Sound('resources/explosion.wav')
 # CONSTANTS
@@ -335,22 +336,64 @@ def intro(ships):
     main_txt1 = "ready up"
     done = False
     i = SCREENHEIGHT
-    while not done and i > 102:
+    while not done:
         if i > 100:
             i -= 1
         DISPLAY.fill(BLACK)
         DISPLAY.blit(BACKGROUND,(0,0))
 
         p1_txt = SPACEFONT.render(main_txt1, True, WHITE)
-        DISPLAY.blit(p1_txt,(200, i))
+        DISPLAY.blit(p1_txt, (250, i))
 
         for ship in ships:
             if ship.alive:
                 DISPLAY.blit(ship.image, (ship.x, ship.y))
 
+        for event in pygame.event.get():
+            if not hasattr(event, 'key'):
+                continue
+
+            # QUIT Event
+            elif event.type == KEYDOWN:
+                if (event.key == K_RIGHT):
+                    ships[0].change_angle("RIGHT", False)
+                if (event.key == K_LEFT):
+                    ships[0].change_angle("LEFT", False)
+                if (event.key == K_d):
+                    ships[1].change_angle("RIGHT", False)
+                if (event.key == K_a):
+                    ships[1].change_angle("LEFT", False)
+                if (event.key == K_j):
+                    ships[2].change_angle("LEFT", False)
+                if (event.key == K_l):
+                    ships[2].change_angle("RIGHT", False)
+                if (event.key == K_f):
+                    ships[3].change_angle("LEFT", False)
+                if (event.key == K_h):
+                    ships[3].change_angle("RIGHT", False)
+            elif event.type == KEYUP:
+                if (event.key == K_RIGHT):
+                    ships[0].change_angle("RIGHT2", False)
+                if (event.key == K_LEFT):
+                    ships[0].change_angle("LEFT2", False)
+                if (event.key == K_a):
+                    ships[1].change_angle("LEFT2", False)
+                if (event.key == K_d):
+                    ships[1].change_angle("RIGHT2", False)
+                if (event.key == K_j):
+                    ships[2].change_angle("LEFT2", False)
+                if (event.key == K_l):
+                    ships[2].change_angle("RIGHT2", False)
+                if (event.key == K_f):
+                    ships[3].change_angle("LEFT2", False)
+                if (event.key == K_h):
+                    ships[3].change_angle("RIGHT2", False)
 
         pygame.display.update()
         fpsClock.tick(60)
+
+        if i < 110:
+            done = True
 
 
 def main():
@@ -371,6 +414,7 @@ def main():
     print(shipspeed, maneuv, rocketspeed, superweapon)
 
     # INITIALIZE SHIPS AND DIRECTION
+    pygame.mixer.music.play(0,0)
     explosionSound.set_volume(0)
     missileSound.set_volume(0)
     x = SCREENWIDTH
@@ -379,13 +423,6 @@ def main():
     ship2 = Ship(x * 0.2, y * 0.8, 2)
     ship3 = Ship(x * 0.1, y * 0.1, 3)
     ship4 = Ship(x * 0.8, y * 0.2, 4)
-    ship1.move()
-    ship2.move()
-    ship3.move()
-    ship4.move()
-
-
-
     rocket1 = Rocket(999, 999, 0, False, 1)
     rocket2 = Rocket(999, 999, 0, False, 2)
     rocket3 = Rocket(999, 999, 0, False, 3)
@@ -396,7 +433,7 @@ def main():
     explosion3 = Explode(x + 500, y + 500)
     explosion4 = Explode(x + 500, y + 500)
     explosionSound.set_volume(0.5)
-    missileSound.set_volume(0.3)
+    missileSound.set_volume(0.1)
 
     # INITIALIZE LUKAS POWERUP
     luk = Luk_powerup()
@@ -412,8 +449,8 @@ def main():
     frame_nr = frame_start = frame_start1 = frame_start2 = frame_start3 = 0
 
     # MAINLOOP
+    intro_played = False
 
-    intro([ship1, ship2, ship3, ship4])
     while 1:
 
         frame_nr += 1
@@ -450,10 +487,12 @@ def main():
         DISPLAY.blit(p1_txt, (SCREENWIDTH - 50, 50))
         p2_txt = BIGFONT.render(" " + str(p2_score) + " ", True, WHITE, RED)
         DISPLAY.blit(p2_txt, (50, 50))
-        p3_txt = BIGFONT.render(" " + str(p3_score) + " ", True, WHITE, GREEN)
-        DISPLAY.blit(p3_txt, (50, SCREENHEIGHT - 50))
-        p4_txt = BIGFONT.render(" " + str(p4_score) + " ", True, WHITE, ORANGE)
-        DISPLAY.blit(p4_txt, (SCREENWIDTH - 50, SCREENHEIGHT - 50))
+        if PLAYERS > 2:
+            p3_txt = BIGFONT.render(" " + str(p3_score) + " ", True, WHITE, GREEN)
+            DISPLAY.blit(p3_txt, (50, SCREENHEIGHT - 50))
+        if PLAYERS > 3:
+            p4_txt = BIGFONT.render(" " + str(p4_score) + " ", True, WHITE, ORANGE)
+            DISPLAY.blit(p4_txt, (SCREENWIDTH - 50, SCREENHEIGHT - 50))
 
         # ENDGAME
         if p1_score > p2_score + 20 and p1_score > p3_score + 20 and p1_score > p4_score + 20:
@@ -800,6 +839,10 @@ def main():
 
         pygame.display.update()
         fpsClock.tick(60)
+
+        if not intro_played:
+            intro([ship1, ship2, ship3, ship4])
+            intro_played = True
 
 
 if __name__ == "__main__":
