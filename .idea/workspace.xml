@@ -12,10 +12,11 @@
     <session id="507926941">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="2" />
+          <entry key="project.closed" value="3" />
           <entry key="project.open.time.0" value="1" />
+          <entry key="project.open.time.3" value="1" />
           <entry key="project.open.time.4" value="1" />
-          <entry key="project.opened" value="2" />
+          <entry key="project.opened" value="3" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -46,34 +47,22 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="153">
               <caret line="232" column="38" selection-start-line="232" selection-start-column="38" selection-end-line="232" selection-end-column="38" />
-              <folding>
-                <element signature="e#12864#14835#0" />
-              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main4players.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="409">
-              <caret line="122" column="50" lean-forward="true" selection-start-line="122" selection-start-column="50" selection-end-line="122" selection-end-column="50" />
+              <caret line="122" column="50" selection-start-line="122" selection-start-column="50" selection-end-line="122" selection-end-column="50" />
               <folding>
                 <element signature="e#22#32#0" expanded="true" />
-                <element signature="e#2129#2581#0" />
-                <element signature="e#2613#3065#0" />
-                <element signature="e#3097#3549#0" />
-                <element signature="e#4065#6804#0" />
-                <element signature="e#6846#8261#0" />
-                <element signature="e#8207#8435#0" />
-                <element signature="e#8611#8929#0" />
-                <element signature="e#8965#10873#0" />
-                <element signature="e#10891#26931#0" />
                 <marker date="1552844898452" expanded="true" signature="8225:8230" ph="..." />
               </folding>
             </state>
@@ -223,9 +212,8 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24973656" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24973656" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
@@ -266,33 +254,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main.py">
+    <entry file="file://$PROJECT_DIR$/main4players.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="232" column="38" selection-start-line="232" selection-start-column="38" selection-end-line="232" selection-end-column="38" />
+        <state relative-caret-position="409">
+          <caret line="122" column="50" selection-start-line="122" selection-start-column="50" selection-end-line="122" selection-end-column="50" />
           <folding>
-            <element signature="e#12864#14835#0" />
+            <element signature="e#22#32#0" expanded="true" />
+            <marker date="1552844898452" expanded="true" signature="8225:8230" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main4players.py">
+    <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="409">
-          <caret line="122" column="50" lean-forward="true" selection-start-line="122" selection-start-column="50" selection-end-line="122" selection-end-column="50" />
-          <folding>
-            <element signature="e#22#32#0" expanded="true" />
-            <element signature="e#2129#2581#0" />
-            <element signature="e#2613#3065#0" />
-            <element signature="e#3097#3549#0" />
-            <element signature="e#4065#6804#0" />
-            <element signature="e#6846#8261#0" />
-            <element signature="e#8207#8435#0" />
-            <element signature="e#8611#8929#0" />
-            <element signature="e#8965#10873#0" />
-            <element signature="e#10891#26931#0" />
-            <marker date="1552844898452" expanded="true" signature="8225:8230" ph="..." />
-          </folding>
+        <state relative-caret-position="153">
+          <caret line="232" column="38" selection-start-line="232" selection-start-column="38" selection-end-line="232" selection-end-column="38" />
         </state>
       </provider>
     </entry>
