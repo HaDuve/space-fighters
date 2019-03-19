@@ -46,6 +46,20 @@ ENDGAME = pygame.image.load('resources/endgamescreen1600.png')
 LUKASPOWERUP = pygame.image.load('resources/lukas_powerup.png')
 EXPLOSION = pygame.image.load('resources/explosion.png')
 
+# TEXTURES SUPERWEAPONS
+SHIP1_LS = pygame.image.load('resources/ship1_lightspeed.png')
+SHIP1_SM = pygame.image.load('resources/spacemine.png')
+SHIP1_PH = pygame.image.load('resources/ship1_phantom.png')
+SHIP2_LS = pygame.image.load('resources/ship2_lightspeed.png')
+SHIP2_SM = pygame.image.load('resources/spacemine.png')
+SHIP2_PH = pygame.image.load('resources/ship2_phantom.png')
+SHIP3_LS = pygame.image.load('resources/ship3_lightspeed.png')
+SHIP3_SM = pygame.image.load('resources/spacemine.png')
+SHIP3_PH = pygame.image.load('resources/ship3_phantom.png')
+SHIP4_LS = pygame.image.load('resources/ship4_lightspeed.png')
+SHIP4_SM = pygame.image.load('resources/spacemine.png')
+SHIP4_PH = pygame.image.load('resources/ship4_phantom.png')
+
 # representing colours
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
@@ -216,6 +230,9 @@ class Ship:
                 self.k_right += -m
             else:
                 self.k_left += m
+
+    def lightspeed(self):
+
 
 
 class Rocket:
