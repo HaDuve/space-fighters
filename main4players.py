@@ -155,6 +155,9 @@ class Ship:
         self.boolean = False
         self.direc = ""
         self.alive = True
+        self.ls_start = [0,0]
+        self.ls_end = [0,0]
+        self.ls_alive = False
 
     def respawntime(self):
         pass
@@ -231,7 +234,26 @@ class Ship:
             else:
                 self.k_left += m
 
-    def lightspeed(self):
+    def start_lightspeed(self):
+        self.ls_alive = True
+        self.ls_start = [self.x,self.y]
+        rad = self.direction * math.pi / 180    
+        self.ls_end = [ 
+                        self.x + 50*(-self.speed * math.sin(rad)),
+                        self.y + 50*(-self.speed * math.cos(rad))
+                        ]
+        image = pygame.transform.rotate(SHIP1_LS, self.direction)
+        DISPLAY.blit(image, (self.x, self.y))
+        self.alive = False
+
+    def update_lightspeed(self):
+        pass
+        
+
+    def stop_lightspeed(self):
+        self.ls_alive = False
+        
+
 
 
 
@@ -834,6 +856,17 @@ def main():
                 if (event.key == K_t):
                     missileSound.play()
                     rocket4 = Rocket(ship4.x, ship4.y, ship4.direction, True, 4)
+                
+                # SUPERWEAPON with DOWN
+                if (event.key == K_DOWN):
+                    ship1.start_lightspeed()
+                    
+                if (event.key == K_s):
+                    pass
+                if (event.key == K_k):
+                    pass
+                if (event.key == K_g):
+                    pass
 
 
             elif event.type == KEYUP:
