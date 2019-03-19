@@ -235,23 +235,30 @@ class Ship:
                 self.k_left += m
 
     def start_lightspeed(self):
-        self.ls_alive = True
-        self.ls_start = [self.x,self.y]
-        rad = self.direction * math.pi / 180    
-        self.ls_end = [ 
-                        self.x + 50*(-self.speed * math.sin(rad)),
-                        self.y + 50*(-self.speed * math.cos(rad))
-                        ]
-        image = pygame.transform.rotate(SHIP1_LS, self.direction)
-        DISPLAY.blit(image, (self.x, self.y))
-        self.alive = False
+        if self.alive:
+            self.ls_alive = True
+            self.ls_start = [self.x,self.y]
+            rad = self.direction * math.pi / 180    
+            self.ls_end = [ 
+                            self.x + 50*(-self.speed * math.sin(rad)),
+                            self.y + 50*(-self.speed * math.cos(rad))
+                            ]
+            image = pygame.transform.rotate(SHIP1_LS, self.direction)
+            DISPLAY.blit(image, (self.x, self.y))
+            self.alive = False
 
     def update_lightspeed(self):
         pass
         
 
     def stop_lightspeed(self):
-        self.ls_alive = False
+        if not self.alive:
+            self.ls_alive = False
+            self.alive = True
+            self.x = self.ls_end[0]
+            self.y = self.ls_end[1]
+            image = pygame.transform.rotate(SHIP1_LS, self.direction)
+            DISPLAY.blit(image, (self.x, self.y))
         
 
 
@@ -859,7 +866,10 @@ def main():
                 
                 # SUPERWEAPON with DOWN
                 if (event.key == K_DOWN):
-                    ship1.start_lightspeed()
+                    if ship1.ls_alive:
+                        ship1.stop_lightspeed()
+                    else:
+                        ship1.start_lightspeed()
                     
                 if (event.key == K_s):
                     pass
