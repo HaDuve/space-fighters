@@ -3,6 +3,7 @@ import sys
 import pygame
 import math
 import random
+import time
 from pygame.locals import *
 
 # INITIALIZE
@@ -247,7 +248,7 @@ class Ship:
             DISPLAY.blit(image, (self.x, self.y))
             self.alive = False
 
-    def update_lightspeed(self):
+    def cd_lightspeed(self):
         pass
         
 
@@ -493,6 +494,7 @@ def main():
     p4_score = 0
 
     frame_nr = frame_start = frame_start1 = frame_start2 = frame_start3 = 0
+    frame_cd1 = frame_cd2 = frame_cd3 = frame_cd4 = 0
 
     # MAINLOOP
     intro_played = False
@@ -866,17 +868,25 @@ def main():
                 
                 # SUPERWEAPON with DOWN
                 if (event.key == K_DOWN):
-                    if ship1.ls_alive:
-                        ship1.stop_lightspeed()
-                    else:
+                    if frame_nr > frame_cd1 + 200:
                         ship1.start_lightspeed()
-                    
+                        frame_cd1 = frame_nr                     
+                    ship1.stop_lightspeed()             
                 if (event.key == K_s):
-                    pass
+                    if frame_nr > frame_cd2 + 200:
+                        ship2.start_lightspeed()
+                        frame_cd2 = frame_nr                     
+                    ship2.stop_lightspeed() 
                 if (event.key == K_k):
-                    pass
+                    if frame_nr > frame_cd3 + 200:
+                        ship3.start_lightspeed()
+                        frame_cd3 = frame_nr                     
+                    ship3.stop_lightspeed() 
                 if (event.key == K_g):
-                    pass
+                    if frame_nr > frame_cd4 + 200:
+                        ship4.start_lightspeed()
+                        frame_cd4 = frame_nr                     
+                    ship4.stop_lightspeed() 
 
 
             elif event.type == KEYUP:
