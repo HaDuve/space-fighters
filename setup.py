@@ -1,8 +1,9 @@
-import cx_Freeze
+from distutils.core import setup
+import py2exe
 
-executables = [cx_Freeze.Executable("main.py")]
+setup(console=["main.py"])
 
-cx_Freeze.setup(
+"""setup(
     name="Space fighters",
     options={"build_exe": {"packages": ["pygame","sys"],
         "include_files":["main4players.py", "resources/background.png", 'resources/ship1.png',
@@ -19,4 +20,4 @@ cx_Freeze.setup(
                           'resources/spacemine.png', 'resources/ship4_phantom.png'
                           ]}},
     executables=executables
-)
+)"""
