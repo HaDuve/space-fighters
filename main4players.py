@@ -46,7 +46,7 @@ ROCKET4 = pygame.image.load('resources/rocket4.png')
 ENDGAME = pygame.image.load('resources/endgamescreen1600.png')
 LUKASPOWERUP = pygame.image.load('resources/lukas_powerup.png')
 EXPLOSION = pygame.image.load('resources/explosion.png')
-EXPLOSION_GIF = pygame.image.load('resources/explosion_anim_300x300.png')
+EXPLOSION_GIF = pygame.image.load('resources/explosion_anim_900x900.png')
 
 # TEXTURES SUPERWEAPONS
 SHIP1_LS = pygame.image.load('resources/ship1_lightspeed.png')
@@ -309,18 +309,20 @@ class Explode:
         self.x = x
         self.y = y
         self.last = pygame.time.get_ticks()
-        self.duration = 600
-        self.animation = 1
+        self.duration = 1000
+        self.animation = 0
         explosionSound.play()
 
     def update(self):
         now = pygame.time.get_ticks()
-        # // represents animationspeed -> // 2 equals 50% speed
-        self.animation += now - self.last // 2
-        if self.animation > 81:
-            self.animation = 1
+        # // represents animationspeed -> / 2 equals 50% speed
+        self.animation += 1
+        if self.animation > 810:
+            self.animation = 0
         if now - self.last <= self.duration:
-            DISPLAY.blit(EXPLOSION, (self.x, self.y), )
+            DISPLAY.blit(EXPLOSION_GIF, (self.x - 50, self.y - 50),
+                         pygame.Rect((self.animation % 9) * 900 / 9, (self.animation // 9) * 900 / 9,
+                                     900 / 9, 900 / 9))
         
 
 
