@@ -150,7 +150,8 @@ class Ship:
         self.image = SHIP1
         self.x = random.choice(range(5, 9)) * x / 10
         self.y = random.choice(range(5, 9)) * y / 10
-        self.speed = shipspeed[player - 1]
+        # BALANCE SPEED HERE
+        self.speed = 0.7 * shipspeed[player - 1]
         self.direction = 0
         self.k_left = self.k_right = 0
         self.player = player
@@ -251,7 +252,8 @@ class Ship:
             self.direc = "RIGHT2"
 
     def change_angle2(self):
-        m = maneuv[self.player - 1]
+        # BALANCE MANEUV HERE
+        m = 0.6 * maneuv[self.player - 1]
         if self.direc == "LEFT" and self.boolean:
             if not self.lukas:
                 self.k_left += m
@@ -295,14 +297,18 @@ class Rocket:
     def __init__(self, x, y, direction, exists, player):
         self.x = x
         self.y = y
-        self.speed = 1
+        
         self.direction = direction
         self.exists = exists
         self.player = player
+        
+        # BALANCE ROCKETSPEED HERE
+        self.speed = 0.2 * rocketspeed[self.player - 1]
+        self.maxspeed = rocketspeed[self.player - 1]
 
     def move(self):
         if self.exists:
-            if self.speed < rocketspeed[self.player - 1]:
+            if self.speed < self.maxspeed:
                 self.speed += self.speed * 0.1 + 0.7
             if self.x > SCREENWIDTH and self.x < SCREENWIDTH + 10:
                 self.x = 0
