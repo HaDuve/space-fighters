@@ -47,6 +47,7 @@ ENDGAME = pygame.image.load('resources/endgamescreen1600.png')
 LUKASPOWERUP = pygame.image.load('resources/lukas_powerup.png')
 EXPLOSION = pygame.image.load('resources/explosion.png')
 EXPLOSION_GIF = pygame.image.load('resources/explosion_anim_900x900.png')
+RESPAWN_GIF = pygame.image.load('resources/respawn_anim_900x900_test.png')
 
 # TEXTURES SUPERWEAPONS
 SHIP1_LS = pygame.image.load('resources/ship1_lightspeed.png')
@@ -147,8 +148,8 @@ class Ship:
 
     def __init__(self, x, y, player):
         self.image = SHIP1
-        self.x = random.choice(range(5, 11)) * x / 10
-        self.y = random.choice(range(5, 11)) * y / 10
+        self.x = random.choice(range(5, 9)) * x / 10
+        self.y = random.choice(range(5, 9)) * y / 10
         self.speed = shipspeed[player - 1]
         self.direction = 0
         self.k_left = self.k_right = 0
@@ -160,11 +161,37 @@ class Ship:
         self.ls_start = [0,0]
         self.ls_end = [0,0]
         self.ls_alive = False
+        self.last = pygame.time.get_ticks()
+        self.respawn_duration = 1600
+        self.respawn_animation = 0
+        self.respawn_running = True
+        self.respawn_x = self.x
+        self.respawn_y = self.y
+        
+        
 
-    def respawntime(self):
-        pass
+    def respawn(self):
+        if True:        
+            self.alive = False
+            now = pygame.time.get_ticks()
+            # 2 represents animationspeed -> 2 equals 50% speed
+            if now % 2 == 0:
+                self.respawn_animation += 1
+            if now - self.last <= self.respawn_duration:
+                DISPLAY.blit(RESPAWN_GIF, (self.respawn_x - 50, self.respawn_y - 50),
+                             pygame.Rect((self.respawn_animation % 9) * 900 / 9,
+                                         (self.respawn_animation // 9) * 900 / 9,
+                                         900 / 9, 900 / 9))
+            else:
+                self.respawn_running = False
+                self.alive = True
+                self.x = self.respawn_x
+                self.y = self.respawn_y
 
     def move(self):
+        # RESPAWN
+        if self.respawn_running and self. player <= PLAYERS:
+            self.respawn()
         # CANCEL OUT PLAYERS
 
         if self.player > PLAYERS:
@@ -309,14 +336,15 @@ class Explode:
         self.x = x
         self.y = y
         self.last = pygame.time.get_ticks()
-        self.duration = 1000
+        self.duration = 1600
         self.animation = 0
         explosionSound.play()
 
     def update(self):
         now = pygame.time.get_ticks()
-        # // represents animationspeed -> / 2 equals 50% speed
-        self.animation += 1
+        # 2 represents animationspeed -> 2 equals 50% speed
+        if now % 2 == 0:
+            self.animation += 1
         if self.animation > 810:
             self.animation = 0
         if now - self.last <= self.duration:
@@ -361,7 +389,7 @@ def endgame(p1, p2, p3, p4):
         text_dead2 = FONT.render("Red    (Player2): " + str(p2), True, WHITE, RED)
         text_dead3 = FONT.render("Green (Player3): " + str(p3), True, WHITE, GREEN)
         text_dead4 = FONT.render("Orange (Player4): " + str(p4), True, WHITE, ORANGE)
-        text_restart = FONT.render(" Restart Game?  |  [Y]es!  |  [N]o! ", True, WHITE, BLACK)
+        text_restart = FONT.render("|  Restart Game?  |  [Y]es  |  [N]o   |", True, WHITE, BLACK)
 
         DISPLAY.blit(text_dead1, (200, 250))
         DISPLAY.blit(text_dead2, (200, 300))
@@ -402,8 +430,8 @@ def intro(ships):
         DISPLAY.blit(p1_txt, (250, i))
 
         for ship in ships:
-            if ship.alive:
-                DISPLAY.blit(ship.image, (ship.x, ship.y))
+            ship.move()
+                
 
         for event in pygame.event.get():
             if not hasattr(event, 'key'):
