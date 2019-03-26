@@ -874,8 +874,8 @@ def main():
             elif event.type == KEYDOWN:
                 # print(event.key)
                 if event.key == K_ESCAPE:
-                    pygame.quit()
-                    sys.exit()
+                    import main
+                    main.main()
 
                 # MOVEMENT with ARROW KEYS
 
@@ -911,25 +911,29 @@ def main():
                 
                 # SUPERWEAPON with DOWN
                 if (event.key == K_DOWN):
-                    if frame_nr > frame_cd1 + 200:
-                        ship1.start_lightspeed()
-                        frame_cd1 = frame_nr                     
-                    ship1.stop_lightspeed()             
+                    if superweapon[0] == 1:
+                        if frame_nr > frame_cd1 + 200:
+                            ship1.start_lightspeed()
+                            frame_cd1 = frame_nr
+                        ship1.stop_lightspeed()
                 if (event.key == K_s):
-                    if frame_nr > frame_cd2 + 200:
-                        ship2.start_lightspeed()
-                        frame_cd2 = frame_nr                     
-                    ship2.stop_lightspeed() 
+                    if superweapon[1] == 1:
+                        if frame_nr > frame_cd2 + 200:
+                            ship2.start_lightspeed()
+                            frame_cd2 = frame_nr
+                        ship2.stop_lightspeed()
                 if (event.key == K_k):
-                    if frame_nr > frame_cd3 + 200:
-                        ship3.start_lightspeed()
-                        frame_cd3 = frame_nr                     
-                    ship3.stop_lightspeed() 
+                    if superweapon[2] == 1:
+                        if frame_nr > frame_cd3 + 200:
+                            ship3.start_lightspeed()
+                            frame_cd3 = frame_nr
+                        ship3.stop_lightspeed()
                 if (event.key == K_g):
-                    if frame_nr > frame_cd4 + 200:
-                        ship4.start_lightspeed()
-                        frame_cd4 = frame_nr                     
-                    ship4.stop_lightspeed() 
+                    if superweapon[3] == 1:
+                        if frame_nr > frame_cd4 + 200:
+                            ship4.start_lightspeed()
+                            frame_cd4 = frame_nr
+                        ship4.stop_lightspeed()
 
 
             elif event.type == KEYUP:

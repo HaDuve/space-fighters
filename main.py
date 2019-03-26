@@ -275,6 +275,12 @@ def choose_mode(playercount, player = 1):
         points_pl4 = " Money left for Upgrades :  " + str(STATS4[3]) + " $ "
         bool_money_4 = STATS4[3] >= 0
         stats_text1 = stats_text2 = stats_text3 = player_txt1_ = points_txt_ = ""
+
+
+        super_text1 = "Chose your Superweapon : < Light Speed >"
+        super_text2 = "Chose your Superweapon : < Phantom Shield >"
+        super_text3 = "Chose your Superweapon : < Space Mine >"
+
         
         if player == 1:
             DISPLAY.blit(pygame.transform.scale(SHIP1,(100,100)),(580,50))
@@ -287,6 +293,19 @@ def choose_mode(playercount, player = 1):
                 points_txt_ = MEDFONT.render((points_pl1), True, WHITE, BLACK)
             else:
                 points_txt_ = MEDFONT.render((points_pl1), True, RED, BLACK)
+
+            if STATS1[4] == 1:
+                super_text_ = FONT.render((super_text1), True, WHITE, BLACK)
+                DISPLAY.blit(pygame.transform.scale(SHIP1_LS,(40, 160)),(620,420))
+            if STATS1[4] == 2:
+                super_text_ = FONT.render((super_text2), True, WHITE, BLACK)
+                DISPLAY.blit(pygame.transform.scale(SHIP1_SM,(40,40)),(620,540))
+            if STATS1[4] == 3:
+                super_text_ = FONT.render((super_text3), True, WHITE, BLACK)
+                DISPLAY.blit(pygame.transform.scale(SHIP1_PH,(40,40)),(595,540))
+                DISPLAY.blit(pygame.transform.scale(SHIP1   ,(40,40)),(635,540))
+                DISPLAY.blit(pygame.transform.scale(SHIP1_PH,(40,40)),(675,540))
+
         if player == 2:
             DISPLAY.blit(pygame.transform.scale(SHIP2,(100,100)),(580,50))
             player_txt1 = " PLAYER " + str(player) +" MODIFY STATS "
@@ -298,6 +317,19 @@ def choose_mode(playercount, player = 1):
                 points_txt_ = MEDFONT.render((points_pl2), True, WHITE, BLACK)
             else:
                 points_txt_ = MEDFONT.render((points_pl2), True, RED, BLACK)
+
+            if STATS2[4] == 1:
+                super_text_ = FONT.render((super_text1), True, WHITE, BLACK)
+                DISPLAY.blit(pygame.transform.scale(SHIP2_LS,(40, 160)),(620,420))
+            if STATS2[4] == 2:
+                super_text_ = FONT.render((super_text2), True, WHITE, BLACK)
+                DISPLAY.blit(pygame.transform.scale(SHIP2_SM,(40,40)),(620,540))
+            if STATS2[4] == 3:
+                super_text_ = FONT.render((super_text3), True, WHITE, BLACK)
+                DISPLAY.blit(pygame.transform.scale(SHIP2_PH,(40,40)),(595,540))
+                DISPLAY.blit(pygame.transform.scale(SHIP2   ,(40,40)),(635,540))
+                DISPLAY.blit(pygame.transform.scale(SHIP2_PH,(40,40)),(675,540))
+
         if player == 3:
             DISPLAY.blit(pygame.transform.scale(SHIP3,(100,100)),(580,50))
             player_txt1 = " PLAYER " + str(player) +" MODIFY STATS "
@@ -309,6 +341,19 @@ def choose_mode(playercount, player = 1):
                 points_txt_ = MEDFONT.render((points_pl3), True, WHITE, BLACK)
             else:
                 points_txt_ = MEDFONT.render((points_pl3), True, RED, BLACK)
+
+            if STATS3[4] == 1:
+                super_text_ = FONT.render((super_text1), True, WHITE, BLACK)
+                DISPLAY.blit(pygame.transform.scale(SHIP3_LS,(40, 160)),(620,420))
+            if STATS3[4] == 2:
+                super_text_ = FONT.render((super_text2), True, WHITE, BLACK)
+                DISPLAY.blit(pygame.transform.scale(SHIP3_SM,(40,40)),(620,540))
+            if STATS3[4] == 3:
+                super_text_ = FONT.render((super_text3), True, WHITE, BLACK)
+                DISPLAY.blit(pygame.transform.scale(SHIP3_PH,(40,40)),(595,540))
+                DISPLAY.blit(pygame.transform.scale(SHIP3   ,(40,40)),(635,540))
+                DISPLAY.blit(pygame.transform.scale(SHIP3_PH,(40,40)),(675,540))
+
         if player == 4:
             DISPLAY.blit(pygame.transform.scale(SHIP4,(100,100)),(580,50))
             player_txt1 = " PLAYER " + str(player) +" MODIFY STATS "
@@ -321,6 +366,19 @@ def choose_mode(playercount, player = 1):
             else:
                 points_txt_ = MEDFONT.render((points_pl4), True, RED, BLACK)
 
+            if STATS4[4] == 1:
+                super_text_ = FONT.render((super_text1), True, WHITE, BLACK)
+                DISPLAY.blit(pygame.transform.scale(SHIP4_LS,(40, 160)),(620,420))
+            if STATS4[4] == 2:
+                super_text_ = FONT.render((super_text2), True, WHITE, BLACK)
+                DISPLAY.blit(pygame.transform.scale(SHIP4_SM,(40,40)),(620,540))
+            if STATS4[4] == 3:
+                super_text_ = FONT.render((super_text3), True, WHITE, BLACK)
+                DISPLAY.blit(pygame.transform.scale(SHIP4_PH,(40,40)),(595,540))
+                DISPLAY.blit(pygame.transform.scale(SHIP4   ,(40,40)),(635,540))
+                DISPLAY.blit(pygame.transform.scale(SHIP4_PH,(40,40)),(675,540))
+
+
         stats_text1_ = FONT.render((stats_text1), True, WHITE, BLACK)
         stats_text2_ = FONT.render((stats_text2), True, WHITE, BLACK)
         stats_text3_ = FONT.render((stats_text3), True, WHITE, BLACK)
@@ -328,6 +386,8 @@ def choose_mode(playercount, player = 1):
         DISPLAY.blit(stats_text1_,(180, 240))
         DISPLAY.blit(stats_text2_,(180, 340))
         DISPLAY.blit(stats_text3_,(180, 440))
+
+        DISPLAY.blit(super_text_, (180, 540))
                      
         DISPLAY.blit(player_txt1_,(100, 100))
         DISPLAY.blit(points_txt_,(100, 150))
@@ -400,7 +460,7 @@ def intro():
     i = SCREENHEIGHT
     while not done and i > 102:
         if i > 100:
-            i-=1
+            i-=2
         DISPLAY.fill(BLACK)
         DISPLAY.blit(BACKGROUND,(0,0))
 

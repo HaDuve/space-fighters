@@ -15,10 +15,13 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/main.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="391">
-                  <caret line="32" column="50" selection-start-line="32" selection-start-column="50" selection-end-line="32" selection-end-column="50" />
+                <state relative-caret-position="123">
+                  <caret line="338" column="35" selection-start-line="338" selection-start-column="35" selection-end-line="338" selection-end-column="35" />
                   <folding>
                     <element signature="e#22#32#0" expanded="true" />
+                    <element signature="e#3299#4118#0" />
+                    <element signature="e#4153#5991#0" />
+                    <element signature="e#6031#7885#0" />
                   </folding>
                 </state>
               </provider>
@@ -31,8 +34,11 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/main4players.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-11014">
-                  <caret line="267" column="31" lean-forward="true" selection-start-line="267" selection-start-column="31" selection-end-line="267" selection-end-column="31" />
+                <state relative-caret-position="973">
+                  <caret line="928" column="48" lean-forward="true" selection-start-line="928" selection-start-column="48" selection-end-line="928" selection-end-column="48" />
+                  <folding>
+                    <element signature="e#22#32#0" expanded="true" />
+                  </folding>
                 </state>
               </provider>
             </entry>
@@ -66,17 +72,17 @@
         <option value="$PROJECT_DIR$/main3players.py" />
         <option value="$PROJECT_DIR$/main2players.py" />
         <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/setup.py" />
         <option value="$PROJECT_DIR$/main.py" />
         <option value="$PROJECT_DIR$/main4players.py" />
-        <option value="$PROJECT_DIR$/setup.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
-    <option name="x" value="-170" />
-    <option name="y" value="-25" />
-    <option name="width" value="1934" />
-    <option name="height" value="1047" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="1912" />
+    <option name="y" value="-8" />
+    <option name="width" value="1936" />
+    <option name="height" value="1056" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -84,7 +90,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Course" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -109,6 +114,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Course" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -127,7 +133,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.setup">
+  <component name="RunManager" selected="Python.main4players">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="space-fighters" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -198,9 +204,9 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.setup" />
         <item itemvalue="Python.main4players" />
         <item itemvalue="Python.main" />
+        <item itemvalue="Python.setup" />
       </list>
     </recent_temporary>
   </component>
@@ -208,14 +214,14 @@
     <configuration />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
+    <frame x="1912" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.11011591" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.10958904" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.17665616" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.17665616" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -239,16 +245,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="32" column="50" selection-start-line="32" selection-start-column="50" selection-end-line="32" selection-end-column="50" />
-          <folding>
-            <element signature="e#22#32#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/setup.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
@@ -258,8 +254,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/main4players.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-11014">
-          <caret line="267" column="31" lean-forward="true" selection-start-line="267" selection-start-column="31" selection-end-line="267" selection-end-column="31" />
+        <state relative-caret-position="973">
+          <caret line="928" column="48" lean-forward="true" selection-start-line="928" selection-start-column="48" selection-end-line="928" selection-end-column="48" />
+          <folding>
+            <element signature="e#22#32#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="123">
+          <caret line="338" column="35" selection-start-line="338" selection-start-column="35" selection-end-line="338" selection-end-column="35" />
+          <folding>
+            <element signature="e#22#32#0" expanded="true" />
+            <element signature="e#3299#4118#0" />
+            <element signature="e#4153#5991#0" />
+            <element signature="e#6031#7885#0" />
+          </folding>
         </state>
       </provider>
     </entry>
