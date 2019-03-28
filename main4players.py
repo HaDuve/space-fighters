@@ -565,6 +565,18 @@ def main():
         explosion3.update()
         explosion4.update()
 
+        def get_ship_pos():
+            p1 = ship1.x, ship1.y
+            p2 = ship2.x, ship2.y
+            p3 = ship3.x, ship3.y
+            p4 = ship4.x, ship4.y
+            return [p1,p2,p3,p4]
+
+        def search_and_destroy(pos1, pos2, ship1_destr=False,ship2_destr=False,ship3_destr=False,ship4_destr=False):
+
+            pass
+
+
         luk.update(frame_nr)
         if not luk.alive and frame_nr % 100 == 0:
             luk.x = (random.choice(range(0, 10)) * 80)

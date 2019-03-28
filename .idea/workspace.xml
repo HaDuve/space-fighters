@@ -15,8 +15,8 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/main.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="123">
-                  <caret line="338" column="35" selection-start-line="338" selection-start-column="35" selection-end-line="338" selection-end-column="35" />
+                <state relative-caret-position="514">
+                  <caret line="352" column="80" lean-forward="true" selection-start-line="352" selection-start-column="80" selection-end-line="352" selection-end-column="80" />
                   <folding>
                     <element signature="e#22#32#0" expanded="true" />
                     <element signature="e#3299#4118#0" />
@@ -34,8 +34,8 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/main4players.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="973">
-                  <caret line="928" column="48" lean-forward="true" selection-start-line="928" selection-start-column="48" selection-end-line="928" selection-end-column="48" />
+                <state relative-caret-position="500">
+                  <caret line="576" column="16" lean-forward="true" selection-start-line="576" selection-start-column="16" selection-end-line="576" selection-end-column="16" />
                   <folding>
                     <element signature="e#22#32#0" expanded="true" />
                   </folding>
@@ -79,10 +79,10 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="1912" />
+    <option name="x" value="89" />
     <option name="y" value="-8" />
-    <option name="width" value="1936" />
-    <option name="height" value="1056" />
+    <option name="width" value="1934" />
+    <option name="height" value="1047" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -214,7 +214,7 @@
     <configuration />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1912" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.10958904" />
@@ -252,25 +252,25 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main4players.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="973">
-          <caret line="928" column="48" lean-forward="true" selection-start-line="928" selection-start-column="48" selection-end-line="928" selection-end-column="48" />
-          <folding>
-            <element signature="e#22#32#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="123">
-          <caret line="338" column="35" selection-start-line="338" selection-start-column="35" selection-end-line="338" selection-end-column="35" />
+        <state relative-caret-position="514">
+          <caret line="352" column="80" lean-forward="true" selection-start-line="352" selection-start-column="80" selection-end-line="352" selection-end-column="80" />
           <folding>
             <element signature="e#22#32#0" expanded="true" />
             <element signature="e#3299#4118#0" />
             <element signature="e#4153#5991#0" />
             <element signature="e#6031#7885#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main4players.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="500">
+          <caret line="576" column="16" lean-forward="true" selection-start-line="576" selection-start-column="16" selection-end-line="576" selection-end-column="16" />
+          <folding>
+            <element signature="e#22#32#0" expanded="true" />
           </folding>
         </state>
       </provider>
