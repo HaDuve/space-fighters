@@ -265,7 +265,7 @@ class Ship:
             else:
                 self.k_left += m
 
-    def start_lightspeed(self):
+    def start_lightspeed(self, other1, other2, other3):
         if self.alive:
             self.ls_alive = True
             self.ls_start = [self.x,self.y]
@@ -276,6 +276,11 @@ class Ship:
                             ]
             image = pygame.transform.rotate(SHIP1_LS, self.direction)
             DISPLAY.blit(image, (self.x, self.y))
+
+            # Compute if other ships die, depending on if they are near the rect center
+            """
+            if other1.x
+            """
             self.alive = False
         
 
@@ -431,8 +436,12 @@ def intro(ships):
             i -= 1
         DISPLAY.fill(BLACK)
         DISPLAY.blit(BACKGROUND,(0,0))
-
-        p1_txt = SPACEFONT.render(main_txt1, True, WHITE)
+        if i > 400:
+            p1_txt = SPACEFONT.render(main_txt1, True, WHITE)
+        elif i > 300:
+            p1_txt = SPACEFONT.render(main_txt1, True, WHITE)
+        else:
+            p1_txt = SPACEFONT.render(main_txt1, True, WHITE)
         DISPLAY.blit(p1_txt, (250, i))
 
         for ship in ships:
@@ -925,25 +934,25 @@ def main():
                 if (event.key == K_DOWN):
                     if superweapon[0] == 1:
                         if frame_nr > frame_cd1 + 200:
-                            ship1.start_lightspeed()
+                            ship1.start_lightspeed(ship2, ship3, ship4)
                             frame_cd1 = frame_nr
                         ship1.stop_lightspeed()
                 if (event.key == K_s):
                     if superweapon[1] == 1:
                         if frame_nr > frame_cd2 + 200:
-                            ship2.start_lightspeed()
+                            ship2.start_lightspeed(ship1, ship3, ship4)
                             frame_cd2 = frame_nr
                         ship2.stop_lightspeed()
                 if (event.key == K_k):
                     if superweapon[2] == 1:
                         if frame_nr > frame_cd3 + 200:
-                            ship3.start_lightspeed()
+                            ship3.start_lightspeed(ship1, ship2, ship4)
                             frame_cd3 = frame_nr
                         ship3.stop_lightspeed()
                 if (event.key == K_g):
                     if superweapon[3] == 1:
                         if frame_nr > frame_cd4 + 200:
-                            ship4.start_lightspeed()
+                            ship4.start_lightspeed(ship1, ship2, ship3)
                             frame_cd4 = frame_nr
                         ship4.stop_lightspeed()
 
