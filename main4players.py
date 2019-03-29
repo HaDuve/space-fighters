@@ -292,9 +292,16 @@ class Ship:
             self.y = self.ls_end[1]
             image = pygame.transform.rotate(SHIP1_LS, self.direction)
             DISPLAY.blit(image, (self.x, self.y))
-        
+
+    def start_spacemine(self):
+        pass
 
 
+class Spacemine:
+    def __init__(self, x, y, alive):
+        self.x = x
+        self.y = y
+        self.alive = alive
 
 
 class Rocket:
