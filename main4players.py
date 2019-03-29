@@ -144,13 +144,28 @@ superweapon = []
 print(shipspeed, maneuv, rocketspeed, superweapon)
 
 
+def lies_between(x, y, z):
+    a = distance(y, z)
+    b = distance(z, x)
+    c = distance(x, y)
+    return a**2 + b**2 >= c**2 and a**2 + c**2 >= b**2
+
+
+def distance(A, B):
+    return math.sqrt((A.x - B.x)**2 + (A.y - B.y)**2)
+
+class Point:
+    def __init__(self,x ,y):
+        self.x = x
+        self.y = y
+
 class Ship:
 
     def __init__(self, x, y, player):
         self.image = SHIP1
         self.x = random.choice(range(5, 9)) * x / 10
         self.y = random.choice(range(5, 9)) * y / 10
-        # BALANCE SPEED HERE
+        # TODO BALANCE SPEED HERE
         self.speed = 0.7 * shipspeed[player - 1]
         self.direction = 0
         self.k_left = self.k_right = 0
@@ -168,14 +183,12 @@ class Ship:
         self.respawn_running = True
         self.respawn_x = self.x
         self.respawn_y = self.y
-        
-        
 
     def respawn(self):
         if True:        
             self.alive = False
             now = pygame.time.get_ticks()
-            # 2 represents animationspeed -> 2 equals 50% speed
+            # 2 represents animation speed -> 2 equals 50% speed
             if now % 2 == 0:
                 self.respawn_animation += 1
             if now - self.last <= self.respawn_duration:
@@ -252,7 +265,7 @@ class Ship:
             self.direc = "RIGHT2"
 
     def change_angle2(self):
-        # BALANCE MANEUV HERE
+        # TODO BALANCE MANEUV HERE
         m = 0.6 * maneuv[self.player - 1]
         if self.direc == "LEFT" and self.boolean:
             if not self.lukas:
@@ -278,11 +291,33 @@ class Ship:
             DISPLAY.blit(image, (self.x, self.y))
 
             # Compute if other ships die, depending on if they are near the rect center
-            """
-            if other1.x
-            """
+            p_start = Point(self.ls_start[0], self.ls_start[1])
+            p_end = Point(self.ls_end[0], self.ls_end[1])
+
+            p_other1 = Point(other1.x, other1.y)
+            p_other2 = Point(other2.x, other2.y)
+            p_other3 = Point(other3.x, other3.y)
+
+
+            # TODO FIND A GOOD WAY TO DESTROY OTHER SHIPS
+            if lies_between(p_other1, p_start, p_end) and (distance(p_end, p_other1) < 100
+                                                        or distance(p_start, p_other1) < 100):
+                other1.alive = False
+                other1.respawn_running = True
+                other1.respawn()
+            if lies_between(p_other2, p_start, p_end) and (distance(p_end, p_other2) < 100
+                                                        or distance(p_start, p_other2) < 100):
+                other2.alive = False
+                other2.respawn_running = True
+                other2.respawn()
+            if lies_between(p_other3, p_start, p_end) and (distance(p_end, p_other3) < 100
+                                                        or distance(p_start, p_other3) < 100):
+                other3.alive = False
+                other3.respawn_running = True
+                other3.respawn()
+
+
             self.alive = False
-        
 
     def stop_lightspeed(self):
         if not self.alive:
@@ -294,13 +329,14 @@ class Ship:
             DISPLAY.blit(image, (self.x, self.y))
 
     def start_spacemine(self):
-        pass
+        return Spacemine(self.x ,self.y, self.direc, True)
 
 
 class Spacemine:
-    def __init__(self, x, y, alive):
+    def __init__(self, x, y, direc, alive):
         self.x = x
         self.y = y
+        self.direc = direc
         self.alive = alive
 
 
@@ -314,14 +350,14 @@ class Rocket:
         self.exists = exists
         self.player = player
         
-        # BALANCE ROCKETSPEED HERE
-        self.speed = 0.2 * rocketspeed[self.player - 1]
-        self.maxspeed = rocketspeed[self.player - 1]
+        # TODO BALANCE ROCKETSPEED HERE
+        self.speed = 0.2 * rocketspeed[self.player - 1] + 0.5
+        self.maxspeed = rocketspeed[self.player - 1] * 1.5
 
     def move(self):
         if self.exists:
             if self.speed < self.maxspeed:
-                self.speed += self.speed * 0.1 + 0.7
+                self.speed = self.speed * 1.01 + 0.01 * rocketspeed[self.player - 1]
             if self.x > SCREENWIDTH and self.x < SCREENWIDTH + 10:
                 self.x = 0
             if self.x < 0 and self.x > -SCREENWIDTH - 10:
@@ -370,7 +406,6 @@ class Explode:
                          pygame.Rect((self.animation % 9) * 900 / 9, (self.animation // 9) * 900 / 9,
                                      900 / 9, 900 / 9))
         
-
 
 class Luk_powerup():
     def __init__(self, x=400, y=400):
