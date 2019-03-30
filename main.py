@@ -361,8 +361,8 @@ def choose_mode(playercount, player = 1):
             stats_text1 = " Ship Speed : " + STATS4[0] * "|x|"
             stats_text2 = " Maneuverability : " + STATS4[1] * "|x|"
             stats_text3 = " Rocket Max Speed : " + STATS4[2] * "|x|"
-            if STATS3[3] >= 0:
-                points_txt_ = MEDFONT.render((points_pl3), True, WHITE, BLACK)
+            if STATS4[3] >= 0:
+                points_txt_ = MEDFONT.render((points_pl4), True, WHITE, BLACK)
             else:
                 points_txt_ = MEDFONT.render((points_pl4), True, RED, BLACK)
 
