@@ -279,7 +279,7 @@ def choose_mode(playercount, player = 1):
 
         super_text1 = "Chose your Superweapon : < Light Speed >"
         super_text2 = "Chose your Superweapon : < Space Mine >"
-        super_text3 = "Chose your Superweapon : < Phantom Shield >"
+        super_text3 = "Chose your Superweapon : < Phantom Shield // NOT READY YET >"
 
         
         if player == 1:

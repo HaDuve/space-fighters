@@ -47,6 +47,7 @@ ENDGAME = pygame.image.load('resources/endgamescreen1600.png')
 LUKASPOWERUP = pygame.image.load('resources/lukas_powerup.png')
 EXPLOSION = pygame.image.load('resources/explosion.png')
 EXPLOSION_GIF = pygame.image.load('resources/explosion_anim_900x900.png')
+EXPLOSION_GIF_BIG = pygame.image.load('resources/explosion_anim_1200x1200.png')
 RESPAWN_GIF = pygame.image.load('resources/respawn_anim_900x900_test.png')
 
 # TEXTURES SUPERWEAPONS
@@ -278,7 +279,7 @@ class Ship:
             else:
                 self.k_left += m
 
-    def start_lightspeed(self, other1, other2, other3):
+    def start_lightspeed(self, other1, other2, other3) -> int:
         if self.alive:
             self.ls_alive = True
             self.ls_start = [self.x,self.y]
@@ -298,29 +299,28 @@ class Ship:
             p_other2 = Point(other2.x, other2.y)
             p_other3 = Point(other3.x, other3.y)
 
+            #Which ships are hit?
+            bool_123 = [False, False, False]
 
             # TODO FIND A GOOD WAY TO DESTROY OTHER SHIPS
             if lies_between(p_other1, p_start, p_end) and (distance(p_end, p_other1) < 100
                                                         or distance(p_start, p_other1) < 100):
-                other1.alive = False
-                other1.respawn_running = True
-                other1.respawn()
+                bool_123[0] = True
+                
             if lies_between(p_other2, p_start, p_end) and (distance(p_end, p_other2) < 100
                                                         or distance(p_start, p_other2) < 100):
-                other2.alive = False
-                other2.respawn_running = True
-                other2.respawn()
+                bool_123[1] = True
+            
             if lies_between(p_other3, p_start, p_end) and (distance(p_end, p_other3) < 100
                                                         or distance(p_start, p_other3) < 100):
-                other3.alive = False
-                other3.respawn_running = True
-                other3.respawn()
+                bool_123[2] = True
 
-
+            
             self.alive = False
+            return bool_123
 
     def stop_lightspeed(self):
-        if not self.alive:
+        if not self.alive and self.ls_alive:
             self.ls_alive = False
             self.alive = True
             self.x = self.ls_end[0]
@@ -328,16 +328,66 @@ class Ship:
             image = pygame.transform.rotate(SHIP1_LS, self.direction)
             DISPLAY.blit(image, (self.x, self.y))
 
-    def start_spacemine(self):
-        return Spacemine(self.x ,self.y, self.direc, True)
+    def start_spacemine(self, frame_nr):
+        return Spacemine(self.x ,self.y, self.k_left, self.k_right, self.speed, self.player, frame_nr, True)
 
 
 class Spacemine:
-    def __init__(self, x, y, direc, alive):
+    def __init__(self, x, y, left, right, speed, player,now,alive):
         self.x = x
         self.y = y
-        self.direc = direc
+        self.direction = left + right
         self.alive = alive
+        self.speed = 0.2 * speed
+        self.player = player
+        self.radius = 20
+        rad = 0
+        now = 0
+        self.last = pygame.time.get_ticks()
+        self.duration = 16000
+        self.hasexploded = False
+        
+    def update(self):
+        if self.alive:
+            now = pygame.time.get_ticks()
+            
+            rad = self.direction * math.pi / 180
+            self.x += -self.speed * math.sin(rad)
+            self.y += -self.speed * math.cos(rad)
+            if self.x > SCREENWIDTH and self.x < SCREENWIDTH + 10:
+                self.x = 0
+            if self.x < 0 and self.x > -SCREENWIDTH - 10:
+                self.x = SCREENWIDTH
+            if self.y > SCREENHEIGHT and self.y < SCREENHEIGHT + 10:
+                self.y = 0
+            if self.y < 0 and self.y > -SCREENHEIGHT - 10:
+                self.y = SCREENHEIGHT
+
+            if now - self.last <= self.duration - 6000:
+                DISPLAY.blit(pygame.transform.scale(SHIP1_SM,(40,40)),(self.x,self.y))
+                self.radius = 20 + 5
+            elif now - self.last <= self.duration - 5000:
+                DISPLAY.blit(pygame.transform.scale(SHIP1_SM,(42,42)),(self.x,self.y))
+                self.radius = 21 + 5
+            elif now - self.last <= self.duration - 4000:
+                DISPLAY.blit(pygame.transform.scale(SHIP1_SM,(44,44)),(self.x,self.y))
+                self.radius = 22 + 5
+            elif now - self.last <= self.duration - 3000:
+                DISPLAY.blit(pygame.transform.scale(SHIP1_SM,(46,46)),(self.x,self.y))
+                self.radius = 23 + 5
+            elif now - self.last <= self.duration - 2000:
+                DISPLAY.blit(pygame.transform.scale(SHIP1_SM,(48,48)),(self.x,self.y))
+                self.radius = 24 + 5
+            elif now - self.last <= self.duration - 1000:
+                DISPLAY.blit(pygame.transform.scale(SHIP1_SM,(52,52)),(self.x,self.y))
+                self.radius = 26 + 5
+            elif now - self.last <= self.duration:
+                DISPLAY.blit(pygame.transform.scale(SHIP1_SM,(57,57)),(self.x,self.y))
+                self.radius = 29 + 5
+            else:
+                self.alive = False
+            
+            
 
 
 class Rocket:
@@ -402,9 +452,10 @@ class Explode:
         if self.animation > 810:
             self.animation = 0
         if now - self.last <= self.duration:
-            DISPLAY.blit(EXPLOSION_GIF, (self.x - 50, self.y - 50),
-                         pygame.Rect((self.animation % 9) * 900 / 9, (self.animation // 9) * 900 / 9,
-                                     900 / 9, 900 / 9))
+            if self.x < SCREENWIDTH and self.y < SCREENHEIGHT:
+                DISPLAY.blit(EXPLOSION_GIF_BIG, (self.x - 50, self.y - 50),
+                             pygame.Rect((self.animation % 9) * 1200 / 9, (self.animation // 9) * 1200 / 9,
+                                         1200 / 9, 1200 / 9))
         
 
 class Luk_powerup():
@@ -429,14 +480,18 @@ def endgame(p1, p2, p3, p4):
         DISPLAY.blit(ENDGAME, (0, 0))
         # Get all Events
         if p1 > p2 and p1 > p3 and p1 > p4:
-            score = "Player 1 has won with " + str(p1) + " points!"
+            score = "BLUE (1) has won with " + str(p1) + " points!"
+            text_dead = BIGFONT.render(score, True, BLUE, BLACK)
         if p1 < p2 and p2 > p3 and p2 > p4:
-            score = "Player 2 has won with " + str(p2) + " points!"
+            score = "RED (2) has won with " + str(p2) + " points!"
+            text_dead = BIGFONT.render(score, True, RED, BLACK)
         if p3 > p1 and p3 > p2 and p3 > p4:
-            score = "Player 3 has won with " + str(p3) + " points!"
+            score = "GREEN (3) has won with " + str(p3) + " points!"
+            text_dead = BIGFONT.render(score, True, GREEN, BLACK)
         if p4 > p1 and p4 > p2 and p4 > p3:
-            score = "Player 4 has won with " + str(p4) + " points!"
-        text_dead = BIGFONT.render(score, True, WHITE, BLACK)
+            score = "ORANGE (4) has won with " + str(p4) + " points!"
+            text_dead = BIGFONT.render(score, True, ORANGE, BLACK)
+        
         DISPLAY.blit(text_dead, (200, 150))
         text_dead1 = FONT.render("Blue   (Player1): " + str(p1), True, WHITE, BLUE)
         text_dead2 = FONT.render("Red    (Player2): " + str(p2), True, WHITE, RED)
@@ -481,9 +536,11 @@ def intro(ships):
         if i > 400:
             p1_txt = SPACEFONT.render(main_txt1, True, WHITE)
         elif i > 300:
-            p1_txt = SPACEFONT.render(main_txt1, True, WHITE)
+            p1_txt = SPACEFONT.render(main_txt1, True, RED)
+        elif i > 200:
+            p1_txt = SPACEFONT.render(main_txt1, True, ORANGE)
         else:
-            p1_txt = SPACEFONT.render(main_txt1, True, WHITE)
+            p1_txt = SPACEFONT.render(main_txt1, True, GREEN)
         DISPLAY.blit(p1_txt, (250, i))
 
         for ship in ships:
@@ -554,7 +611,7 @@ def main():
     superweapon = [int(STATS1[-2]), int(STATS2[-2]), int(STATS3[-2]), int(STATS4[-2])]
     print(shipspeed, maneuv, rocketspeed, superweapon)
 
-    # INITIALIZE SHIPS AND DIRECTION
+    # INITIALIZE ENTITIES AND MUSIC
     pygame.mixer.music.play(0,0)
     explosionSound.set_volume(0)
     missileSound.set_volume(0)
@@ -573,8 +630,22 @@ def main():
     explosion2 = Explode(x + 500, y + 500)
     explosion3 = Explode(x + 500, y + 500)
     explosion4 = Explode(x + 500, y + 500)
-    explosionSound.set_volume(0.5)
+    explosion_super1 = Explode(x + 500, y + 500)
+    explosion_super2 = Explode(x + 500, y + 500)
+    explosion_super3 = Explode(x + 500, y + 500)
+    explosion_super4 = Explode(x + 500, y + 500)
+    explosion_mine1 = Explode(x + 500, y + 500)
+    explosion_mine2 = Explode(x + 500, y + 500)
+    explosion_mine3 = Explode(x + 500, y + 500)
+    explosion_mine4 = Explode(x + 500, y + 500)
+    explosion_mine5 = Explode(x + 500, y + 500)
+    explosionSound.set_volume(0.3)
     missileSound.set_volume(0.1)
+    spaceminelist = []
+    otherlist1 = [ship2, ship3, ship4]
+    otherlist2 = [ship1, ship3, ship4]
+    otherlist3 = [ship1, ship2, ship4]
+    otherlist4 = [ship1, ship2, ship3]
 
     # INITIALIZE LUKAS POWERUP
     luk = Luk_powerup()
@@ -615,6 +686,125 @@ def main():
         explosion2.update()
         explosion3.update()
         explosion4.update()
+        explosion_super1.update()
+        explosion_super2.update()
+        explosion_super3.update()
+        explosion_super4.update()
+        explosion_mine1.update()
+        explosion_mine2.update()
+        explosion_mine3.update()
+        explosion_mine4.update()
+        explosion_mine5.update()
+        
+
+        otherlist1 = [ship2, ship3, ship4]
+        otherlist2 = [ship1, ship3, ship4]
+        otherlist3 = [ship1, ship2, ship4]
+        otherlist4 = [ship1, ship2, ship3]
+        if spaceminelist:
+            for mine in spaceminelist:
+                if mine.alive:
+                    mine.update()
+                    minepoint = Point(mine.x, mine.y)
+                    
+                    if mine.player == 1:
+                        for entity in otherlist1:
+                            entitypoint = Point(entity.x, entity.y)
+                            if distance(minepoint, entitypoint) < mine.radius:
+                                explosion_mine1 = Explode(mine.x,mine.y)
+                                spaceminelist.remove(mine)
+                                explosion_super1 = Explode(entity.x, entity.y)
+                                if entity.player == 1:
+                                    ship1 = Ship(x * 0.8, y * 0.8, 1)
+                                    p1_score -= 1
+                                if entity.player == 2:
+                                    ship2 = Ship(x * 0.2, y * 0.8, 2)
+                                    p1_score += 3
+                                    p2_score -= 1
+                                if entity.player == 3:
+                                    ship3 = Ship(x * 0.1, y * 0.1, 3)
+                                    p1_score += 3
+                                    p3_score -= 1
+                                if entity.player == 4:
+                                    ship4 = Ship(x * 0.8, y * 0.2, 4)
+                                    p1_score += 3
+                                    p4_score -= 1
+                                    
+                    if mine.player == 2:
+                        for entity in otherlist2:
+                            entitypoint = Point(entity.x, entity.y)
+                            if distance(minepoint, entitypoint) < mine.radius:
+                                explosion_mine2 = Explode(mine.x,mine.y)
+                                spaceminelist.remove(mine)
+                                explosion_super2 = Explode(entity.x, entity.y)
+                                if entity.player == 1:
+                                    ship1 = Ship(x * 0.8, y * 0.8, 1)
+                                    p1_score += 3
+                                    p2_score -= 1
+                                if entity.player == 2:
+                                    ship2 = Ship(x * 0.2, y * 0.8, 2)
+                                    p2_score -= 1
+                                if entity.player == 3:
+                                    ship3 = Ship(x * 0.1, y * 0.1, 3)
+                                    p2_score += 3
+                                    p3_score -= 1
+                                if entity.player == 4:
+                                    ship4 = Ship(x * 0.8, y * 0.2, 4)
+                                    p2_score += 3
+                                    p4_score -= 1
+                                    
+                    if mine.player == 3:
+                        for entity in otherlist3:
+                            entitypoint = Point(entity.x, entity.y)
+                            if distance(minepoint, entitypoint) < mine.radius:
+                                explosion_mine3 = Explode(mine.x,mine.y)
+                                spaceminelist.remove(mine)
+                                explosion_super3 = Explode(entity.x, entity.y)
+                                if entity.player == 1:
+                                    ship1 = Ship(x * 0.8, y * 0.8, 1)
+                                    p3_score += 3
+                                    p1_score -= 1
+                                if entity.player == 2:
+                                    ship2 = Ship(x * 0.2, y * 0.8, 2)
+                                    p3_score += 3
+                                    p2_score -= 1
+                                if entity.player == 3:
+                                    ship3 = Ship(x * 0.1, y * 0.1, 3)
+                                    p3_score -= 1
+                                if entity.player == 4:
+                                    ship4 = Ship(x * 0.8, y * 0.2, 4)
+                                    p4_score += 3
+                                    p4_score -= 1
+                                    
+                    if mine.player == 4:
+                        for entity in otherlist4:
+                            entitypoint = Point(entity.x, entity.y)
+                            if distance(minepoint, entitypoint) < mine.radius:
+                                explosion_mine4 = Explode(mine.x,mine.y)
+                                spaceminelist.remove(mine)
+                                explosion_super4 = Explode(entity.x, entity.y)
+                                if entity.player == 1:
+                                    ship1 = Ship(x * 0.8, y * 0.8, 1)
+                                    p4_score += 3
+                                    p1_score -= 1
+                                if entity.player == 2:
+                                    ship2 = Ship(x * 0.2, y * 0.8, 2)
+                                    p4_score += 3
+                                    p2_score -= 1
+                                if entity.player == 3:
+                                    ship3 = Ship(x * 0.1, y * 0.1, 3)
+                                    p4_score += 3
+                                    p3_score -= 1
+                                if entity.player == 4:
+                                    ship4 = Ship(x * 0.8, y * 0.2, 4)
+                                    p4_score -= 1
+                    
+                elif not mine.alive and not mine.hasexploded:
+                    explosion_mine5 = Explode(mine.x, mine.y)
+                    mine.hasexploded = True
+                    
+                
+        
 
         def get_ship_pos():
             p1 = ship1.x, ship1.y
@@ -974,29 +1164,117 @@ def main():
                 
                 # SUPERWEAPON with DOWN
                 if (event.key == K_DOWN):
+                    # LIGHTSPEED SUPERWEAPON PLAYER 1
                     if superweapon[0] == 1:
-                        if frame_nr > frame_cd1 + 200:
-                            ship1.start_lightspeed(ship2, ship3, ship4)
+                        if frame_nr > frame_cd1 + 200 and ship1.alive:
+                            kill_bool = [False, False, False]
+                            kill_bool = ship1.start_lightspeed(ship2, ship3, ship4)
+                            if kill_bool[0]:
+                                explosion_super1 = Explode(ship2.x, ship2.y)
+                                ship2 = Ship(x * 0.2, y * 0.8, 2)
+                                p2_score -= 1
+                                p1_score += 3
+                            if kill_bool[1]:
+                                explosion_super1 = Explode(ship3.x, ship3.y)
+                                ship3 = Ship(x * 0.1, y * 0.1, 3)
+                                p3_score -= 1
+                                p1_score += 3
+                            if kill_bool[2]:
+                                explosion_super1 = Explode(ship4.x, ship4.y)
+                                ship4 = Ship(x * 0.8, y * 0.2, 4)
+                                p4_score -= 1
+                                p1_score += 3
                             frame_cd1 = frame_nr
                         ship1.stop_lightspeed()
+                    # SPACEMINE SUPERWEAPON PLAYER 1
+                    if superweapon[0] == 2:
+                        if frame_nr > frame_cd1 + 200 and ship1.alive:
+                            frame_cd1 = frame_nr
+                            spaceminelist.append(ship1.start_spacemine(frame_nr))
                 if (event.key == K_s):
+                    # LIGHTSPEED SUPERWEAPON PLAYER 2
                     if superweapon[1] == 1:
-                        if frame_nr > frame_cd2 + 200:
-                            ship2.start_lightspeed(ship1, ship3, ship4)
+                        if frame_nr > frame_cd2 + 200 and ship2.alive:
+                            kill_bool = [False, False, False]
+                            kill_bool = ship2.start_lightspeed(ship1, ship3, ship4)
+                            if kill_bool[0]:
+                                explosion_super2 = Explode(ship1.x, ship1.y)
+                                ship1 = Ship(x * 0.8, y * 0.8, 1)
+                                p1_score -= 1
+                                p2_score += 3
+                            if kill_bool[1]:
+                                explosion_super2 = Explode(ship3.x, ship3.y)
+                                ship3 = Ship(x * 0.1, y * 0.1, 3)
+                                p3_score -= 1
+                                p2_score += 3
+                            if kill_bool[2]:
+                                explosion_super2 = Explode(ship4.x, ship4.y)
+                                ship4 = Ship(x * 0.8, y * 0.2, 4)
+                                p4_score -= 1
+                                p2_score += 3
                             frame_cd2 = frame_nr
                         ship2.stop_lightspeed()
+                    # SPACEMINE SUPERWEAPON PLAYER 2
+                    if superweapon[1] == 2:
+                        if frame_nr > frame_cd2 + 200 and ship2.alive:
+                            frame_cd2 = frame_nr
+                            spaceminelist.append(ship2.start_spacemine(frame_nr))
                 if (event.key == K_k):
+                    # LIGHTSPEED SUPERWEAPON PLAYER 3
                     if superweapon[2] == 1:
-                        if frame_nr > frame_cd3 + 200:
-                            ship3.start_lightspeed(ship1, ship2, ship4)
+                        if frame_nr > frame_cd3 + 200 and ship3.alive:
+                            kill_bool = [False, False, False]
+                            kill_bool = ship3.start_lightspeed(ship1, ship2, ship4)
+                            if kill_bool[0]:
+                                explosion_super3 = Explode(ship1.x, ship1.y)
+                                ship1 = Ship(x * 0.8, y * 0.8, 1)
+                                p1_score -= 1
+                                p3_score += 3
+                            if kill_bool[1]:
+                                explosion_super3 = Explode(ship2.x, ship2.y)
+                                ship2 = Ship(x * 0.2, y * 0.8, 2)
+                                p2_score -= 1
+                                p3_score += 3
+                            if kill_bool[2]:
+                                explosion_super3 = Explode(ship4.x, ship4.y)
+                                ship4 = Ship(x * 0.8, y * 0.2, 4)
+                                p4_score -= 1
+                                p3_score += 3
                             frame_cd3 = frame_nr
                         ship3.stop_lightspeed()
+                    # SPACEMINE SUPERWEAPON PLAYER 3
+                    if superweapon[2] == 2:
+                        if frame_nr > frame_cd3 + 200 and ship3.alive:
+                            frame_cd3 = frame_nr
+                            spaceminelist.append(ship3.start_spacemine(frame_nr))
                 if (event.key == K_g):
+                    # LIGHTSPEED SUPERWEAPON PLAYER 4
                     if superweapon[3] == 1:
-                        if frame_nr > frame_cd4 + 200:
-                            ship4.start_lightspeed(ship1, ship2, ship3)
+                        if frame_nr > frame_cd4 + 200 and ship4.alive:
+                            kill_bool = [False, False, False]
+                            kill_bool = ship4.start_lightspeed(ship1, ship2, ship3)
+                            if kill_bool[0]:
+                                explosion_super4 = Explode(ship1.x, ship1.y)
+                                ship1 = Ship(x * 0.8, y * 0.8, 1)
+                                p1_score -= 1
+                                p4_score += 3
+                            if kill_bool[1]:
+                                explosion_super4 = Explode(ship2.x, ship2.y)
+                                ship2 = Ship(x * 0.2, y * 0.8, 2)
+                                p2_score -= 1
+                                p4_score += 3
+                            if kill_bool[2]:
+                                explosion_super4 = Explode(ship3.x, ship3.y)
+                                ship3 = Ship(x * 0.8, y * 0.2, 4)
+                                p3_score -= 1
+                                p4_score += 3
                             frame_cd4 = frame_nr
                         ship4.stop_lightspeed()
+                    # SPACEMINE SUPERWEAPON PLAYER 4
+                    if superweapon[3] == 2:
+                        if frame_nr > frame_cd4 + 200 and ship4.alive:
+                            frame_cd4 = frame_nr
+                            spaceminelist.append(ship4.start_spacemine(frame_nr))
 
 
             elif event.type == KEYUP:
