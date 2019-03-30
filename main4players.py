@@ -497,7 +497,7 @@ def endgame(p1, p2, p3, p4):
         text_dead2 = FONT.render("Red    (Player2): " + str(p2), True, WHITE, RED)
         text_dead3 = FONT.render("Green (Player3): " + str(p3), True, WHITE, GREEN)
         text_dead4 = FONT.render("Orange (Player4): " + str(p4), True, WHITE, ORANGE)
-        text_restart = FONT.render("|  Restart Game?  |  [Y]es  |  [N]o   |", True, WHITE, BLACK)
+        text_restart = FONT.render("|  Restart Game?  |  [Y]es  |  [N]o   | [M]ain Menue", True, WHITE, BLACK)
 
         DISPLAY.blit(text_dead1, (200, 250))
         DISPLAY.blit(text_dead2, (200, 300))
@@ -520,6 +520,9 @@ def endgame(p1, p2, p3, p4):
                     sys.exit()
                 if event.key == K_y or event.key == K_z:
                     main()
+                if event.key == K_m:
+                    import main
+                    main.main()
         pygame.display.update()
         fpsClock.tick(30)
 
