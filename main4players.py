@@ -302,7 +302,7 @@ class Ship:
             #Which ships are hit?
             bool_123 = [False, False, False]
 
-            # TODO FIND A GOOD WAY TO DESTROY OTHER SHIPS
+            #  DESTROY OTHER SHIPS
             if lies_between(p_other1, p_start, p_end) and (distance(p_end, p_other1) < 100
                                                         or distance(p_start, p_other1) < 100):
                 bool_123[0] = True
@@ -365,25 +365,25 @@ class Spacemine:
 
             if now - self.last <= self.duration - 6000:
                 DISPLAY.blit(pygame.transform.scale(SHIP1_SM,(40,40)),(self.x,self.y))
-                self.radius = 20 + 5
+                self.radius = 20 * 1.5
             elif now - self.last <= self.duration - 5000:
-                DISPLAY.blit(pygame.transform.scale(SHIP1_SM,(42,42)),(self.x,self.y))
-                self.radius = 21 + 5
+                DISPLAY.blit(pygame.transform.scale(SHIP1_SM,(43,43)),(self.x,self.y))
+                self.radius = 22 * 1.5
             elif now - self.last <= self.duration - 4000:
-                DISPLAY.blit(pygame.transform.scale(SHIP1_SM,(44,44)),(self.x,self.y))
-                self.radius = 22 + 5
-            elif now - self.last <= self.duration - 3000:
                 DISPLAY.blit(pygame.transform.scale(SHIP1_SM,(46,46)),(self.x,self.y))
-                self.radius = 23 + 5
+                self.radius = 24 * 1.5
+            elif now - self.last <= self.duration - 3000:
+                DISPLAY.blit(pygame.transform.scale(SHIP1_SM,(49,49)),(self.x,self.y))
+                self.radius = 26 * 1.5
             elif now - self.last <= self.duration - 2000:
-                DISPLAY.blit(pygame.transform.scale(SHIP1_SM,(48,48)),(self.x,self.y))
-                self.radius = 24 + 5
-            elif now - self.last <= self.duration - 1000:
                 DISPLAY.blit(pygame.transform.scale(SHIP1_SM,(52,52)),(self.x,self.y))
-                self.radius = 26 + 5
-            elif now - self.last <= self.duration:
+                self.radius = 28 * 1.5
+            elif now - self.last <= self.duration - 1000:
                 DISPLAY.blit(pygame.transform.scale(SHIP1_SM,(57,57)),(self.x,self.y))
-                self.radius = 29 + 5
+                self.radius = 31 * 1.5
+            elif now - self.last <= self.duration:
+                DISPLAY.blit(pygame.transform.scale(SHIP1_SM,(63,63)),(self.x,self.y))
+                self.radius = 35 * 1.5
             else:
                 self.alive = False
             
@@ -684,21 +684,6 @@ def main():
         rocket2.move()
         rocket3.move()
         rocket4.move()
-        explosion.update()
-        explosion1.update()
-        explosion2.update()
-        explosion3.update()
-        explosion4.update()
-        explosion_super1.update()
-        explosion_super2.update()
-        explosion_super3.update()
-        explosion_super4.update()
-        explosion_mine1.update()
-        explosion_mine2.update()
-        explosion_mine3.update()
-        explosion_mine4.update()
-        explosion_mine5.update()
-        
 
         otherlist1 = [ship2, ship3, ship4]
         otherlist2 = [ship1, ship3, ship4]
@@ -713,7 +698,7 @@ def main():
                     if mine.player == 1:
                         for entity in otherlist1:
                             entitypoint = Point(entity.x, entity.y)
-                            if distance(minepoint, entitypoint) < mine.radius:
+                            if distance(minepoint, entitypoint) < mine.radius + 20:
                                 explosion_mine1 = Explode(mine.x,mine.y)
                                 spaceminelist.remove(mine)
                                 explosion_super1 = Explode(entity.x, entity.y)
@@ -805,22 +790,23 @@ def main():
                 elif not mine.alive and not mine.hasexploded:
                     explosion_mine5 = Explode(mine.x, mine.y)
                     mine.hasexploded = True
-                    
-                
+
         
-
-        def get_ship_pos():
-            p1 = ship1.x, ship1.y
-            p2 = ship2.x, ship2.y
-            p3 = ship3.x, ship3.y
-            p4 = ship4.x, ship4.y
-            return [p1,p2,p3,p4]
-
-        def search_and_destroy(pos1, pos2, ship1_destr=False,ship2_destr=False,ship3_destr=False,ship4_destr=False):
-
-            pass
-
-
+        explosion.update()
+        explosion1.update()
+        explosion2.update()
+        explosion3.update()
+        explosion4.update()
+        explosion_super1.update()
+        explosion_super2.update()
+        explosion_super3.update()
+        explosion_super4.update()
+        explosion_mine1.update()
+        explosion_mine2.update()
+        explosion_mine3.update()
+        explosion_mine4.update()
+        explosion_mine5.update()
+                    
         luk.update(frame_nr)
         if not luk.alive and frame_nr % 100 == 0:
             luk.x = (random.choice(range(0, 10)) * 80)

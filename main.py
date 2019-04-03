@@ -254,6 +254,80 @@ def down_stat(player_nr):
             
     calc_points(player_nr)
 
+def quick_game(playercount):
+    #DOES THE PLAYER WANT A QUICK GAME WITH DEFAULT VALUES?
+    global STATS1
+    global STATS2
+    global STATS3
+    global STATS4
+
+    frame = 0.0
+    frame_nr = SCREENHEIGHT + 300
+    while 1:
+        frame_nr -= 3
+        if frame_nr < 0:
+            frame_nr = SCREENHEIGHT + 300
+        
+        DISPLAY.fill(BLACK)
+        DISPLAY.blit(BACKGROUND,(0,0))
+        #DRAW MAIN MENUE
+        main_txt1 = "spacefighters"
+        main_txt2 = ("quick game")
+        main_txt3 = ("competitive")
+          
+        p1_txt = SPACEFONT.render((main_txt1), True, WHITE)
+        DISPLAY.blit(p1_txt,(200, 100))
+        p2_txt = SPACEFONT.render((main_txt2), True, WHITE)
+        DISPLAY.blit(p2_txt,(100, 250))
+        p3_txt = SPACEFONT.render((main_txt3), True, WHITE)
+        DISPLAY.blit(p3_txt,(100, 350))
+
+
+        DISPLAY.blit(SHIP1,(180+ 300,frame_nr -300))
+        DISPLAY.blit(SHIP2,(230+ 300,frame_nr -250))
+        
+        if playercount > 2:
+            DISPLAY.blit(SHIP3,(280+ 300,frame_nr-180))
+        if playercount > 3:
+            DISPLAY.blit(SHIP4,(330+ 300,frame_nr-200))
+        
+        for event in pygame.event.get():
+            if not hasattr(event, 'key'): continue
+        
+            #QUIT Event
+            elif event.type == KEYDOWN:
+                #print(event.key)
+                if event.key == K_ESCAPE:
+                    main()
+                        
+
+                # Choose Players
+                
+                if (event.key == K_c):
+                    choose_mode(playercount)
+                    
+                if (event.key == K_q):
+                    for i in range(0,5):
+                        STATS1[i] = 4
+                        STATS2[i] = 4
+                        STATS3[i] = 4
+                        STATS4[i] = 4
+                    #DEFAULT SUPERWEAPON?
+                    STATS1[i] = 2
+                    STATS2[i] = 2
+                    STATS3[i] = 2
+                    STATS4[i] = 2
+                    save_stats(1)
+                    save_stats(2)
+                    save_stats(3)
+                    save_stats(4)
+
+                    import main4players
+                    main4players.PLAYERS = playercount
+                    main4players.main()
+        pygame.display.update()
+        fpsClock.tick(60)
+
 
 def choose_mode(playercount, player = 1):   
     while 1:
@@ -480,6 +554,7 @@ def main():
     #MAINLOOP
     intro()
     reset_all_stats()
+    keys_bool = False
     pygame.mixer.music.play(0,0)
 
     while 1:
@@ -489,8 +564,9 @@ def main():
         
         #DRAW MAIN MENUE
         main_txt1 = "spacefighters"
-        main_txt2 = (" # PLAYERS?   --"+
-        "--  KEYS:  P1( left | up | right )  P2( a | w | d )  P3( j | i | l )  P4( f | t | h )")
+        main_txt2 = ("[#] HOW MANY PLAYERS? -- Show [K]eys")
+        main_txt_keys = ("KEYS:  P1( up | left | down | right )  P2( w | a | s | d ) "+
+                         "P3( i | j | k | l )  P4( t | f | g | h )")
         main_txt3 = " (2) "
         main_txt4 = " (3) "
         main_txt5 = " (4) "        
@@ -498,6 +574,9 @@ def main():
         DISPLAY.blit(p1_txt,(200, 100))
         p2_txt = FONT.render((main_txt2), True, WHITE)
         DISPLAY.blit(p2_txt,(100, 250))
+        main_txt_keys_ = FONT.render((main_txt_keys), True, WHITE)
+        if keys_bool:
+            DISPLAY.blit(main_txt_keys_,(100, 290))
         p3_txt = FONT.render((main_txt3), True, WHITE)
         DISPLAY.blit(p3_txt,(150, 325))
         p4_txt = FONT.render((main_txt4), True, WHITE)
@@ -526,20 +605,26 @@ def main():
                     pygame.quit()
                     sys.exit()
 
+                if event.key == K_k:
+                    if keys_bool:
+                        keys_bool = False
+                    else:
+                        keys_bool = True
+                        
+
                 # Choose Players
                 
                 if (event.key == K_2):
                     PLAYERS = 2
-                    choose_mode(2)
+                    quick_game(PLAYERS)
                     
                 if (event.key == K_3):
                     PLAYERS = 3
-                    choose_mode(3)
+                    quick_game(PLAYERS)
                                         
                 if (event.key == K_4):
                     PLAYERS = 4
-                    choose_mode(4)
-                    
+                    quick_game(PLAYERS)
 
 
 
