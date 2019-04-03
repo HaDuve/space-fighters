@@ -155,10 +155,12 @@ def lies_between(x, y, z):
 def distance(A, B):
     return math.sqrt((A.x - B.x)**2 + (A.y - B.y)**2)
 
+
 class Point:
     def __init__(self,x ,y):
         self.x = x
         self.y = y
+
 
 class Ship:
 
@@ -279,7 +281,7 @@ class Ship:
             else:
                 self.k_left += m
 
-    def start_lightspeed(self, other1, other2, other3) -> int:
+    def start_lightspeed(self, other1, other2, other3) -> list:
         if self.alive:
             self.ls_alive = True
             self.ls_start = [self.x,self.y]
@@ -315,7 +317,6 @@ class Ship:
                                                         or distance(p_start, p_other3) < 100):
                 bool_123[2] = True
 
-            
             self.alive = False
             return bool_123
 
@@ -387,8 +388,6 @@ class Spacemine:
             else:
                 self.alive = False
             
-            
-
 
 class Rocket:
 
@@ -458,7 +457,7 @@ class Explode:
                                          1200 / 9, 1200 / 9))
         
 
-class Luk_powerup():
+class LukPowerup:
     def __init__(self, x=400, y=400):
         self.x = x
         self.y = y
@@ -478,6 +477,7 @@ def endgame(p1, p2, p3, p4):
         # Initialize as BLACK
         DISPLAY.fill(BLACK)
         DISPLAY.blit(ENDGAME, (0, 0))
+        text_dead = BIGFONT.render("Winner Winner Chicken Dinner", True, BLUE, BLACK)
         # Get all Events
         if p1 > p2 and p1 > p3 and p1 > p4:
             score = "BLUE (1) has won with " + str(p1) + " points!"
@@ -491,13 +491,13 @@ def endgame(p1, p2, p3, p4):
         if p4 > p1 and p4 > p2 and p4 > p3:
             score = "ORANGE (4) has won with " + str(p4) + " points!"
             text_dead = BIGFONT.render(score, True, ORANGE, BLACK)
-        
+
         DISPLAY.blit(text_dead, (200, 150))
         text_dead1 = FONT.render("Blue   (Player1): " + str(p1), True, WHITE, BLUE)
         text_dead2 = FONT.render("Red    (Player2): " + str(p2), True, WHITE, RED)
-        text_dead3 = FONT.render("Green (Player3): " + str(p3), True, WHITE, GREEN)
+        text_dead3 = FONT.render("Green  (Player3): " + str(p3), True, WHITE, GREEN)
         text_dead4 = FONT.render("Orange (Player4): " + str(p4), True, WHITE, ORANGE)
-        text_restart = FONT.render("|  Restart Game?  |  [Y]es  |  [N]o   | [M]ain Menue", True, WHITE, BLACK)
+        text_restart = FONT.render("|  Restart Game?  |  [Y]es  |  [N]o   | [M]ain Menu", True, WHITE, BLACK)
 
         DISPLAY.blit(text_dead1, (200, 250))
         DISPLAY.blit(text_dead2, (200, 300))
@@ -531,6 +531,7 @@ def intro(ships):
     main_txt1 = "ready up"
     done = False
     i = SCREENHEIGHT
+    j = i
     while not done:
         if i > 100:
             i -= 1
@@ -544,11 +545,13 @@ def intro(ships):
             p1_txt = SPACEFONT.render(main_txt1, True, ORANGE)
         else:
             p1_txt = SPACEFONT.render(main_txt1, True, GREEN)
-        DISPLAY.blit(p1_txt, (250, i))
+
+        if i > 200:
+            j = i
+        DISPLAY.blit(p1_txt, (250, j))
 
         for ship in ships:
             ship.move()
-                
 
         for event in pygame.event.get():
             if not hasattr(event, 'key'):
@@ -651,7 +654,7 @@ def main():
     otherlist4 = [ship1, ship2, ship3]
 
     # INITIALIZE LUKAS POWERUP
-    luk = Luk_powerup()
+    luk = LukPowerup()
     luk_initialized = False
     luk.alive = False
 
