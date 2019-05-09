@@ -682,7 +682,7 @@ def main():
 
         frame_nr += 1
         DISPLAY.fill(BLACK)
-        DISPLAY.blit(BACKGROUND, (0, 0))
+        DISPLAY.blit(BACKGROUND, (0,0))
         ship1.move()
         ship2.move()
         ship3.move()
