@@ -52,16 +52,16 @@ RESPAWN_GIF = pygame.image.load('resources/respawn_anim_900x900_test.png')
 
 # TEXTURES SUPERWEAPONS
 SHIP1_LS = pygame.image.load('resources/ship1_lightspeed.png')
-SHIP1_SM = pygame.image.load('resources/spacemine.png')
+SHIP1_SM = pygame.image.load('resources/spacemine1.png')
 SHIP1_PH = pygame.image.load('resources/ship1_phantom.png')
 SHIP2_LS = pygame.image.load('resources/ship2_lightspeed.png')
-SHIP2_SM = pygame.image.load('resources/spacemine.png')
+SHIP2_SM = pygame.image.load('resources/spacemine2.png')
 SHIP2_PH = pygame.image.load('resources/ship2_phantom.png')
 SHIP3_LS = pygame.image.load('resources/ship3_lightspeed.png')
-SHIP3_SM = pygame.image.load('resources/spacemine.png')
+SHIP3_SM = pygame.image.load('resources/spacemine3.png')
 SHIP3_PH = pygame.image.load('resources/ship3_phantom.png')
 SHIP4_LS = pygame.image.load('resources/ship4_lightspeed.png')
-SHIP4_SM = pygame.image.load('resources/spacemine.png')
+SHIP4_SM = pygame.image.load('resources/spacemine4.png')
 SHIP4_PH = pygame.image.load('resources/ship4_phantom.png')
 
 # representing colours
@@ -363,27 +363,35 @@ class Spacemine:
                 self.y = 0
             if self.y < 0 and self.y > -SCREENHEIGHT - 10:
                 self.y = SCREENHEIGHT
+            if self.player == 1:
+                    m_color = SHIP1_SM
+            elif self.player == 2:
+                    m_color = SHIP2_SM
+            elif self.player == 3:
+                    m_color = SHIP3_SM
+            elif self.player == 4:
+                    m_color = SHIP4_SM
 
             if now - self.last <= self.duration - 6000:
-                DISPLAY.blit(pygame.transform.scale(SHIP1_SM,(40,40)),(self.x,self.y))
+                DISPLAY.blit(pygame.transform.scale(m_color,(40,40)),(self.x,self.y))
                 self.radius = 20 * 1.5
             elif now - self.last <= self.duration - 5000:
-                DISPLAY.blit(pygame.transform.scale(SHIP1_SM,(43,43)),(self.x,self.y))
+                DISPLAY.blit(pygame.transform.scale(m_color,(43,43)),(self.x,self.y))
                 self.radius = 22 * 1.5
             elif now - self.last <= self.duration - 4000:
-                DISPLAY.blit(pygame.transform.scale(SHIP1_SM,(46,46)),(self.x,self.y))
+                DISPLAY.blit(pygame.transform.scale(m_color,(46,46)),(self.x,self.y))
                 self.radius = 24 * 1.5
             elif now - self.last <= self.duration - 3000:
-                DISPLAY.blit(pygame.transform.scale(SHIP1_SM,(49,49)),(self.x,self.y))
+                DISPLAY.blit(pygame.transform.scale(m_color,(49,49)),(self.x,self.y))
                 self.radius = 26 * 1.5
             elif now - self.last <= self.duration - 2000:
-                DISPLAY.blit(pygame.transform.scale(SHIP1_SM,(52,52)),(self.x,self.y))
+                DISPLAY.blit(pygame.transform.scale(m_color,(52,52)),(self.x,self.y))
                 self.radius = 28 * 1.5
             elif now - self.last <= self.duration - 1000:
-                DISPLAY.blit(pygame.transform.scale(SHIP1_SM,(57,57)),(self.x,self.y))
+                DISPLAY.blit(pygame.transform.scale(m_color,(57,57)),(self.x,self.y))
                 self.radius = 31 * 1.5
             elif now - self.last <= self.duration:
-                DISPLAY.blit(pygame.transform.scale(SHIP1_SM,(63,63)),(self.x,self.y))
+                DISPLAY.blit(pygame.transform.scale(m_color,(63,63)),(self.x,self.y))
                 self.radius = 35 * 1.5
             else:
                 self.alive = False
