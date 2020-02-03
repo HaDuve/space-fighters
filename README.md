@@ -10,5 +10,5 @@ P4: F, T, H
 Hello HaDuve here,
 this is my first project on GitHub.
 To play the game, you need Python3 and Pygame installed.
-main.py -> start the game
+main4players.py -> start the game
 Have fun!
