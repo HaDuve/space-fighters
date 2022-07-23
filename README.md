@@ -1,7 +1,7 @@
 # space-fighters
 Quick paced Space-Shooting Game (for 2 to 4 Players)
 
-Controls: ![image](https://user-images.githubusercontent.com/48185176/180592191-93835566-9622-4b41-98b6-5a245f6490f6.png)
+Controls:
 
 P1: arrow keys (left, up, right)
 P2: A, W, D
