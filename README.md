@@ -1,5 +1,6 @@
 # space-fighters
-## Quick paced Space-Shooting Game (for 2 to 4 Players)
+
+Python/PyGame based local Multiplayer Space-Shooting Game (2 to 4 Players) built to have fast-paced fun :)
 
 ### Controls:
 
